@@ -1,0 +1,6 @@
+{
+  "name": "vehicle",
+  "params": {
+    "connector": "simulator"
+  }
+}
