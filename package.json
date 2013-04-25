@@ -20,7 +20,7 @@
                  }
 , "main": "./lib/webinos.vehicle.rpc"
 , "dependencies":
-  { "now": "0.8.8"
+  { "now": "0.8.1"
   }
 , "bundleDependencies":
   [ "events"
