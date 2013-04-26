@@ -1,5 +1,5 @@
 {
-  "name": "Vehicle"
+  "name": "webinos-api-vehicle"
 , "publishConfig": { "tag": "alpha" }
 , "description": "Vehicle API"
 , "keywords": ["webinos", "vehicle" , "API"]
