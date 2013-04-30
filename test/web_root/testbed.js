@@ -1,3 +1,21 @@
+/*******************************************************************************
+ *  Code contributed to the webinos project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Copyright 2012 BMW AG
+ * Copyright 2012 TU München
+ ******************************************************************************/ 
 var vehicle;
 var services;
 var listeners;
@@ -78,16 +96,16 @@ $(document).ready(function () {
     type: 'parksensors-rear',
     supported: true
   }, {
-    type: 'wipers',
+    type: 'wiper',
     supported: true
   }, {
     type: 'tirepressure',
     supported: false
   }, {
-    type: 'doors',
+    type: 'door',
     supported: true
   }, {
-    type: 'windows',
+    type: 'window',
     supported: true
   }, {
     type: 'engineoil',
@@ -131,6 +149,53 @@ $(document).ready(function () {
     $('#vt_info').append("<p>Range " + data.range + "</p>");
     $('#vt_info').append("<p>Timestamp " + data.timestamp + "</p>");
   }
+
+  //Door Data//
+  var handleDoorData = function (data) {
+    postMessage("info", "new Door Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>Driver: " + data.driver + "</p>");
+    $('#vt_info').append("<p>Front Passenger: " + data.frontpassenger + "</p>");
+    $('#vt_info').append("<p>Behind Driver: " + data.behinddriver + "</p>");
+    $('#vt_info').append("<p>Behind Passenger: " + data.behindpassenger + "</p>");
+    $('#vt_info').append("<p>Trunk Deck: " + data.trunkdeck + "</p>");
+  //   $('#vt_info').append("<p>Timestamp: " + data.timestamp + "</p>");
+  }
+  //---Handle Door Data Ends Here----//
+
+  //Window Data//
+  var handleWindowData = function (data) {
+    postMessage("info", "new Window Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>Driver: " + data.driver + "</p>");
+    $('#vt_info').append("<p>Front Passenger: " + data.frontpassenger + "</p>");
+    $('#vt_info').append("<p>Behind Driver: " + data.behinddriver + "</p>");
+    $('#vt_info').append("<p>Behind Passenger: " + data.behindpassenger + "</p>");
+  //   $('#vt_info').append("<p>Timestamp: " + data.timestamp + "</p>");
+  }
+  //---Handle Window Data Ends Here----//
+
+  //Wiper Data//
+  var handleWiperData = function (data) {
+    postMessage("info", "new Wiper Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>Status: " + data.status + "</p>");
+  }
+  //---Handle Wiper Data Ends Here----//
+
+  //Engine Oil Data//
+  var handleEngineOilData = function (data) {
+    postMessage("info", "new EngineOil Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>Level: " + data.level + "</p>");
+  }
+  //---Handle Engine Oil Data Ends Here----//
+ 
+  
   var handleNavigation = function (data) {
     postMessage("info", ".");
     $('#vt_info').empty();
@@ -306,6 +371,9 @@ $(document).ready(function () {
       case "tripcomputer":
         return handleTripData;
         break;
+      case "door":
+        return handleDoorData;
+        break;
       case "parksensors-front":
         return handleParkSensorsData;
         break;
@@ -360,16 +428,19 @@ $(document).ready(function () {
       case "compassneedscalibration":
         return handleCompassNeedsCalibration;
         break;
-      case "wipers":
-        return handleStatus;
+      case "wiper":
+        return handleWiperData;
         break;
-      case "engineoil":
+    /*  case "engineoil":
         return handleStatus;
         break;
       case "windows":
-        return handleGeneric;
-      case "doors":
-        return handleGeneric;
+        return handleGeneric; */
+      case "window":
+        return handleWindowData;
+        break;
+      case "engineoil":
+        return handleEngineOilData;
       default:
         return handleShiftData;
     }

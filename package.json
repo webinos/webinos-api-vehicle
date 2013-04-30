@@ -5,10 +5,10 @@
 , "keywords": ["webinos", "vehicle" , "API"]
 , "version": "0.0.1"
 , "homepage": "http://webinos.org/"
-, "author": "Simon Isenberg <simon.isenberg@bmw.de>"
+, "author": "Simon Isenberg <simon.isenberg@bmw.de>, Krishna Bangalore <krishna.bangalore@in.tum.de>"
 , "repository":
   { "type": "git"
-  , "url": "git://github.com/webinos/Webinos-Platform.git"
+  , "url": "git://github.com/webinos/webinos-api-vehicle.git"
   }
 , "bugs":
   { "email": "webinos-wp4-ml@fokus.fraunhofer.de"

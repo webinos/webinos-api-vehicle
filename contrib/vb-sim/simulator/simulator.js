@@ -1,3 +1,22 @@
+/*******************************************************************************
+*  Code contributed to the webinos project
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+* 
+*     http://www.apache.org/licenses/LICENSE-2.0
+* 
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+* Copyright 2012 BMW AG
+* Copyright 2012 TU München
+******************************************************************************/
+
 now.ready(function () {
   $('#inputGear').removeAttr('disabled');
 });
@@ -198,6 +217,61 @@ $(document).ready(function () {
     }
   });
   //$( "#pr-ol" ).val(( "#slider-pr-ol" ).slider( "value" ) );
+
+  //---------Window Data-----------
+  $("#slider-wd-d").slider({
+    range: "min",
+    value: 0,
+    min: 1,
+    max: 100,
+    slide: function (event, ui) {
+      $("#wd-d").val(ui.value);
+    },
+    stop: function (event, ui) {
+      setWindowData();
+    }
+  });
+
+  $("#slider-wd-fp").slider({
+    range: "min",
+    value: 0,
+    min: 1,
+    max: 100,
+    slide: function (event, ui) {
+      $("#wd-fp").val(ui.value);
+    },
+    stop: function (event, ui) {
+      setWindowData();
+    }
+  }); 
+
+  $("#slider-wd-bd").slider({
+    range: "min",
+    value: 0,
+    min: 1,
+    max: 100,
+    slide: function (event, ui) {
+      $("#wd-bd").val(ui.value);
+    },
+    stop: function (event, ui) {
+      setWindowData();
+    }
+  });
+
+  $("#slider-wd-bp").slider({
+    range: "min",
+    value: 0,
+    min: 1,
+    max: 100,
+    slide: function (event, ui) {
+      $("#wd-bp").val(ui.value);
+    },
+    stop: function (event, ui) {
+      setWindowData();
+    }
+  }); 
+  //--------------------------------
+
   if (navigator.geolocation) {
     $('#myLocation').removeAttr('disabled');
   }
@@ -246,6 +320,35 @@ $(document).ready(function () {
   $('#setTripComputer').click(function () {
     setTripComputer();
   });
+  //-------Door Data-------
+  $('input[id*="dd-"]').change(function () {
+    setDoorData();
+  });
+  $('#setDoorData').click(function () {
+    setDoorData();
+  });
+  //-------Window Data------
+  $('#wd-d').change(function () {
+    setWindowData();
+  });
+  $('#wd-fp').change(function () {
+    setWindowData();
+  });
+  $('#wd-bd').change(function () {
+    setWindowData();
+  });
+  $('#wd-bp').change(function () {
+    setWindowData();
+  });  
+  //--------Wiper Data--------
+  $('#ws-p').change(function () {
+    setWiperData();
+  });
+  //---------Engine Oil Data---
+  $('#eo-l').change(function () {
+    setEngineOilData();
+  });
+  //---------Park Sensor-------
   $('#setPsFront').click(function () {
     setPsFront();
   });
@@ -435,6 +538,41 @@ function setTripComputer() {
   tcData.m = $('#tc-m').val();
   tcData.r = $('#tc-r').val();
   now.setTripComputer(tcData);
+}
+
+//----------Door Data----------
+function setDoorData() {
+  var ddData = new Object();
+  ddData.d = $('#dd-d').val();
+  ddData.fp = $('#dd-fp').val();
+  ddData.bd = $('#dd-bd').val();
+  ddData.bp = $('#dd-bp').val();
+  ddData.td = $('#dd-td').val();
+  now.setDoorData(ddData);
+}
+
+//-----------Window Data--------
+function setWindowData() {
+  var wdData = new Object();
+  wdData.d = $('#wd-d').val();
+  wdData.fp = $('#wd-fp').val();
+  wdData.bd = $('#wd-bd').val();
+  wdData.bp = $('#wd-bp').val();
+  now.setWindowData(wdData);
+}
+
+//------------Wiper Data----------
+function setWiperData() {
+  var wsData = new Object();
+  wsData.p = $('#ws-p').val();
+  now.setWiperData(wsData);
+}
+
+//------------Engine Oil Data------
+function setEngineOilData() {
+  var eoData = new Object();
+  eoData.l = $('#eo-l').val();
+  now.setEngineOilData(eoData);
 }
 
 function updateAddress(address) {
