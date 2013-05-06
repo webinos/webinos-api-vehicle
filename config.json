@@ -1,6 +1,6 @@
 {
   "name": "vehicle",
   "params": {
-    "connector": "simulator"
+    "connector": "obd"
   }
 }
