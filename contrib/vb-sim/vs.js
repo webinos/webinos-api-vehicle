@@ -14,6 +14,7 @@
  * limitations under the License.
  *
  * Copyright 2012 BMW AG
+ * Copyright 2012 TU München
  ******************************************************************************/ 
 
 (function () {
@@ -66,6 +67,74 @@
         ShiftEvent.parent.initEvent.call(this, 'tripcomputer', null, null, null, false, false, stamp);
     }
 
+/*-------Relevant Objects for Door Data------*/
+     DoorDataEvent = function (ddData) {
+        this.initDoorDataEvent(ddData);
+    }
+    DoorDataEvent.prototype = new WDomEvent();
+    DoorDataEvent.prototype.constructor = ShiftEvent;
+    DoorDataEvent.parent = WDomEvent.prototype; // our "super" property
+    DoorDataEvent.prototype.initDoorDataEvent = function (ddData) {
+        this.driver = ddData.d;
+        this.frontpassenger = ddData.fp;
+        this.behinddriver = ddData.bd;
+        this.behindpassenger = ddData.bp;
+        this.trunkdeck = ddData.td;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        DoorDataEvent.parent.initEvent.call(this, 'door', null, null, null, false, false, stamp);
+    }
+/*----------Till Here Door Data---------------*/
+
+//------------Relevant Objects for Window Data-------------
+      WindowDataEvent = function (wdData) {
+        this.initWindowDataEvent(wdData);
+    }
+    WindowDataEvent.prototype = new WDomEvent();
+    WindowDataEvent.prototype.constructor = ShiftEvent;
+    WindowDataEvent.parent = WDomEvent.prototype; // our "super" property
+    WindowDataEvent.prototype.initWindowDataEvent = function (wdData) {
+        this.driver = wdData.d;
+        this.frontpassenger = wdData.fp;
+        this.behinddriver = wdData.bd;
+        this.behindpassenger = wdData.bp;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        WindowDataEvent.parent.initEvent.call(this, 'window', null, null, null, false, false, stamp);
+    }
+
+//------------Relevant Objects for Wiper Data-------------
+      WiperDataEvent = function (wsData) {
+        this.initWiperDataEvent(wsData);
+    }
+    WiperDataEvent.prototype = new WDomEvent();
+    WiperDataEvent.prototype.constructor = ShiftEvent;
+    WiperDataEvent.parent = WDomEvent.prototype; // our "super" property
+    WiperDataEvent.prototype.initWiperDataEvent = function (wsData) {
+        this.status = wsData.p;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        WiperDataEvent.parent.initEvent.call(this, 'wiper', null, null, null, false, false, stamp);
+    }
+
+//------------Relevant Objects for Engine Oil Data-------------
+      EngineOilDataEvent = function (eoData) {
+        this.initEngineOilDataEvent(eoData);
+    }
+    EngineOilDataEvent.prototype = new WDomEvent();
+    EngineOilDataEvent.prototype.constructor = ShiftEvent;
+    EngineOilDataEvent.parent = WDomEvent.prototype; // our "super" property
+    EngineOilDataEvent.prototype.initEngineOilDataEvent = function (eoData) {
+        this.level = eoData.l;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        EngineOilDataEvent.parent.initEvent.call(this, 'engineoil', null, null, null, false, false, stamp);
+    }
+
     function Address(country, region, county, city, street, streetNumber, premises, additionalInformation, postalCode) {
         this.country = country;
         this.region = region;
@@ -77,6 +146,7 @@
         this.additionalInformation = additionalInformation;
         this.postalCode = postalCode;
     }
+
     ParkSensorEvent = function (position, psData) {
         this.initParkSensorEvent(position, psData);
     }
@@ -96,6 +166,7 @@
         var stamp = stamp + d.getUTCMilliseconds();
         ParkSensorEvent.parent.initEvent.call(this, 'parksensor', null, null, null, false, false, stamp);
     }
+
     NavigationEvent = function (type, data) {
         this.initNavigationEvent(type, data);
     }
@@ -110,6 +181,7 @@
         var stamp = stamp + d.getUTCMilliseconds();
         NavigationEvent.parent.initEvent.call(this, type, null, null, null, false, false, stamp);
     }
+
     ControlEvent = function (controlId, active) {
         this.initControlEvent(controlId, active);
     }
@@ -124,6 +196,7 @@
         var stamp = stamp + d.getUTCMilliseconds();
         ControlEvent.parent.initEvent.call(this, 'control-event', null, null, null, false, false, stamp);
     }
+
     DeviceOrientationEvent = function (alpha, beta, gamma) {
         this.initDeviceOrientationEvent(alpha, beta, gamma);
     }
@@ -268,6 +341,30 @@
     psrData.r = 255;
     psrData.or = 255;
     var psfData = psrData;
+
+    //Door Data
+    var ddData = new Object();
+    ddData.d = false;
+    ddData.fp = false;
+    ddData.bd = false;
+    ddData.bp = false;
+    ddData.td = false;
+
+    //Window Data
+    var wdData = new Object();
+    wdData.d = 100;
+    wdData.fp = 100;
+    wdData.bd = 100;
+    wdData.bp = 100;
+  
+    //Wiper Data
+    var wsData = new Object();
+    wsData.p = "notactive";
+
+    //Engine Oil Data
+    var eoData = new Object();
+    eoData.l = "MEASURING";
+
     //LIGHTS
     var lfrData = false;
     var lffData = false;
@@ -311,6 +408,34 @@
         console.log(data);
         if (typeof _listeners.tripcomputer != 'undefined') {
             _listeners.tripcomputer(new TripComputerEvent(tcData));
+        }
+    }
+    everyone.now.setDoorData = function (data) {
+        ddData = data;
+        console.log(data);
+        if (typeof _listeners.door != 'undefined') {
+            _listeners.door(new DoorDataEvent(ddData));
+        }
+    }
+    everyone.now.setWindowData = function (data) {
+        wdData = data;
+        console.log(data);
+        if (typeof _listeners.window != 'undefined') {
+            _listeners.window(new WindowDataEvent(wdData));
+        }
+    }
+    everyone.now.setWiperData = function (data) {
+        wsData = data;
+        console.log(data);
+        if (typeof _listeners.wiper != 'undefined') {
+            _listeners.wiper(new WiperDataEvent(wsData));
+        }
+    }
+    everyone.now.setEngineOilData = function (data) {
+        eoData = data;
+        console.log(data);
+        if (typeof _listeners.engineoil != 'undefined') {
+            _listeners.engineoil(new EngineOilDataEvent(wsData));
         }
     }
     everyone.now.setPsFront = function (data) {
@@ -427,6 +552,18 @@
             case 'tripcomputer':
                 return new TripComputerEvent(tcData);
                 break;
+            case 'door':
+                return new DoorDataEvent(ddData);
+                break;
+            case 'wiper':
+                return new WiperDataEvent(wsData);
+                break;
+            case 'engineoil':
+                return new EngineOilDataEvent(eoData);
+                break;
+            case 'window':
+                return new WindowDataEvent(wdData);
+                break;
             case 'parksensors-front':
                 return new ParkSensorEvent(type, psfData);
                 break;
@@ -476,6 +613,18 @@
                 break;
             case 'tripcomputer':
                 _listeners.tripcomputer = listener;
+                break;
+            case 'door':
+                _listeners.door = listener;
+                break;
+            case 'window':
+                _listeners.window = listener;
+                break;
+            case 'wiper':
+                _listeners.wiper = listener;
+                break;
+            case 'engineoil':
+                _listeners.engineoil = listener;
                 break;
             case 'parksensors-front':
                 _listeners.parksensorsFront = listener;
