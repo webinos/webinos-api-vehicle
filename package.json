@@ -5,7 +5,7 @@
 , "keywords": ["webinos", "vehicle" , "API"]
 , "version": "0.0.1"
 , "homepage": "http://webinos.org/"
-, "author": "Simon Isenberg <simon.isenberg@bmw.de>, Krishna Bangalore <krishna.bangalore@in.tum.de>"
+, "author": "Simon Isenberg <simon.isenberg@bmw.de>, Krishna Bangalore <krishna.bangalore@in.tum.de>, Eric Smekens <eric.smekens@tno.nl>"
 , "repository":
   { "type": "git"
   , "url": "git://github.com/webinos/webinos-api-vehicle.git"
@@ -21,7 +21,6 @@
 , "main": "./lib/webinos.vehicle.rpc"
 , "dependencies":
   { "now": "0.8.1"
-  , "webinos-jsonrpc2": "*"
   ,	"bluetooth-obd": "0.1.0"
   , "serial-obd": "0.1.0"
   }
