@@ -83,65 +83,65 @@
 
     var _listeners = {}; //Listener object
 
-//    //Code for OBD.
-//    var OBDReader = require('serial-obd');
-//    var options = {};
-//    options.baudrate = 115200;
-//    var btOBDReader = new OBDReader('/dev/rfcomm0', options);
+    var OBDReader;
+    var OBDport;
 
+    function start(obdConnector) {
 
-    //Code for bluetooth-serial-port, doesn't work atm.
-    //TODO: Move settings to webinos.config.json, or let it scan.
-    //
-    var OBDReader = require('bluetooth-obd');
-    var btOBDReader = new OBDReader('D8:0D:E3:80:19:B4', 14);
-
-    /**
-     * The listener for 'dataReceived'. This is for events.
-     */
-    btOBDReader.on('dataReceived', function (data) {
-        switch (data.name) {
-            case "rpm":
-                if (typeof _listeners.rpm != 'undefined') {
-                    _listeners.rpm(new RPMEvent(data.value));
-                }
-                break;
-            case "vss":
-                if (typeof _listeners.vss != 'undefined') {
-                    _listeners.vss(new SpeedEvent(data.value));
-                }
-                break;
-            case "load_pct":
-                if (typeof _listeners.load_pct != 'undefined') {
-                    _listeners.load_pct(new EngineLoadEvent(data.value));
-                }
-                break;
-            default:
-                if(data.value === "OK" || data.value === "NO DATA") {
-                    break;
-                } else if (data.value === "?") {
-                    console.log('Unknown answer!');
-                } else {
-                    console.log('No supported pid yet:');
-                    console.log(data);
-                }
-
-                break;
+        if (obdConnector.type === 'bluetooth') {
+            OBDReader = require('bluetooth-obd');
+            OBDport = new OBDReader(obdConnector.address, obdConnector.channel);
+        } else if (obdConnector.type === 'serial') {
+            OBDReader = require('serial-obd');
+            OBDport = new OBDReader(obdConnector.serialPort, obdConnector.options);
         }
-    });
 
-    /**
-     * On connected, start polling.
-     */
-    btOBDReader.on('connected', function () {
-        //For now start polling here.
-        //TODO: When all listeners are disabled, stopPolling. Etc.
-        console.log('OBD-II device is connected');
-        this.startPolling(1000);
-    });
+        /**
+         * The listener for 'dataReceived'. This is for events.
+         */
+        OBDport.on('dataReceived', function (data) {
+            switch (data.name) {
+                case "rpm":
+                    if (typeof _listeners.rpm != 'undefined') {
+                        _listeners.rpm(new RPMEvent(data.value));
+                    }
+                    break;
+                case "vss":
+                    if (typeof _listeners.vss != 'undefined') {
+                        _listeners.vss(new SpeedEvent(data.value));
+                    }
+                    break;
+                case "load_pct":
+                    if (typeof _listeners.load_pct != 'undefined') {
+                        _listeners.load_pct(new EngineLoadEvent(data.value));
+                    }
+                    break;
+                default:
+                    if(data.value === "OK" || data.value === "NO DATA") {
+                        break;
+                    } else if (data.value === "?") {
+                        console.log('Unknown answer!');
+                    } else {
+                        console.log('No supported pid yet:');
+                        console.log(data);
+                    }
 
-    btOBDReader.connect();
+                    break;
+            }
+        });
 
+        /**
+         * On connected, start polling.
+         */
+        OBDport.on('connected', function () {
+            //For now start polling here.
+            //TODO: When all listeners are disabled, stopPolling. Etc.
+            console.log('OBD-II device is connected');
+            this.startPolling(1000);
+        });
+
+        OBDport.connect();
+    }
     /**
      * Get method. Makes use of 'once'. (Eventlistener that only triggers once, and then removes itself.)
      * @param {string} type
@@ -175,10 +175,10 @@
             }
         };
 
-        btOBDReader.on('dataReceived', getMessageHandler);
+        OBDport.on('dataReceived', getMessageHandler);
 
         //Request value after callback.
-        btOBDReader.requestValueByName(type);
+        OBDport.requestValueByName(type);
     }
 
     /**
@@ -205,7 +205,7 @@
                 console.log('type ' + type + ' undefined.');
         }
         if(shouldAdd) {
-            btOBDReader.addPoller(type);
+            OBDport.addPoller(type);
         }
     }
 
@@ -232,12 +232,12 @@
                 console.log('type ' + type + ' undefined.');
         }
         if(shouldRemove) {
-            btOBDReader.removePoller(type);
+            OBDport.removePoller(type);
         }
     }
-
     //Exports
     exports.get = get;
     exports.addListener = addListener;
     exports.removeListener = removeListener;
+    exports.start = start;
 })(module.exports);

@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  * Copyright 2012 BMW AG
- * Copyright 2012 TU München
+ * Copyright 2012 TU Mï¿½nchen
  ******************************************************************************/ 
 var vehicle;
 var services;
@@ -455,7 +455,7 @@ $(document).ready(function () {
       case "wiper":
         return handleWiperData;
         break;
-    /*  case "engineoil":
+      case "engineoil":
         return handleStatus;
         break;
       case "rpm":
@@ -467,7 +467,7 @@ $(document).ready(function () {
       case "load_pct":
         return handleEngineLoadData;
         break;
-      case "windows":
+      /*case "windows":
         return handleGeneric; */
       case "window":
         return handleWindowData;
