@@ -21,7 +21,9 @@
 , "main": "./lib/webinos.vehicle.rpc"
 , "dependencies":
   { "now": "0.8.1"
-  ,	"bluetooth-obd": "0.0.9"
+  , "webinos-jsonrpc2": "*"
+  ,	"bluetooth-obd": "0.1.0"
+  , "serial-obd": "0.1.0"
   }
 , "bundleDependencies":
   [ "events"
