@@ -85,7 +85,6 @@
         var stamp = stamp + d.getUTCMilliseconds();
         DoorDataEvent.parent.initEvent.call(this, 'door', null, null, null, false, false, stamp);
     }
-/*----------Till Here Door Data---------------*/
 
 //------------Relevant Objects for Window Data-------------
       WindowDataEvent = function (wdData) {
@@ -133,6 +132,185 @@
         var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
         var stamp = stamp + d.getUTCMilliseconds();
         EngineOilDataEvent.parent.initEvent.call(this, 'engineoil', null, null, null, false, false, stamp);
+    }
+
+//------------Relevant Objects for Interfaces Data-------------
+      InterfacesDataEvent = function (idData) {
+        this.initInterfacesDataEvent(idData);
+    }
+    InterfacesDataEvent.prototype = new WDomEvent();
+    InterfacesDataEvent.prototype.constructor = ShiftEvent;
+    InterfacesDataEvent.parent = WDomEvent.prototype; // our "super" property
+    InterfacesDataEvent.prototype.initInterfacesDataEvent = function (idData) {
+        this.fuel = idData.fl;
+        this.hybrid = idData.hd;
+        this.steeringwheel = idData.sw;
+        this.vehicletransmission = idData.vt;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        InterfacesDataEvent.parent.initEvent.call(this, 'interfaces', null, null, null, false, false, stamp);
+    }
+
+//------------Relevant Objects for Seat Data-------------
+      SeatDriverDataEvent = function (sdData) {
+        this.initSeatDriverDataEvent(sdData);
+    }
+    SeatDriverDataEvent.prototype = new WDomEvent();
+    SeatDriverDataEvent.prototype.constructor = ShiftEvent;
+    SeatDriverDataEvent.parent = WDomEvent.prototype; // our "super" property
+    SeatDriverDataEvent.prototype.initSeatDriverDataEvent = function (sdData) {
+        this.seatdriver = sdData.d;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        SeatDriverDataEvent.parent.initEvent.call(this, 'seatdriver', null, null, null, false, false, stamp);
+    }
+
+      SeatFrontPassengerDataEvent = function (sfpData) {
+        this.initSeatFrontPassengerDataEvent(sfpData);
+    }
+    SeatFrontPassengerDataEvent.prototype = new WDomEvent();
+    SeatFrontPassengerDataEvent.prototype.constructor = ShiftEvent;
+    SeatFrontPassengerDataEvent.parent = WDomEvent.prototype; // our "super" property
+    SeatFrontPassengerDataEvent.prototype.initSeatFrontPassengerDataEvent = function (sfpData) {
+        this.seatfrontpassenger = sfpData.fp;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        SeatFrontPassengerDataEvent.parent.initEvent.call(this, 'seatfrontpassenger', null, null, null, false, false, stamp);
+    }
+
+      SeatBehindDriverDataEvent = function (sbdData) {
+        this.initSeatBehindDriverDataEvent(sbdData);
+    }
+    SeatBehindDriverDataEvent.prototype = new WDomEvent();
+    SeatBehindDriverDataEvent.prototype.constructor = ShiftEvent;
+    SeatBehindDriverDataEvent.parent = WDomEvent.prototype; // our "super" property
+    SeatBehindDriverDataEvent.prototype.initSeatBehindDriverDataEvent = function (sbdData) {
+        this.seatbehinddriver = sbdData.bd;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        SeatBehindDriverDataEvent.parent.initEvent.call(this, 'seatbehinddriver', null, null, null, false, false, stamp);
+    }
+
+       SeatBehindPassengerDataEvent = function (sbpData) {
+        this.initSeatBehindPassengerDataEvent(sbpData);
+    }
+    SeatBehindPassengerDataEvent.prototype = new WDomEvent();
+    SeatBehindPassengerDataEvent.prototype.constructor = ShiftEvent;
+    SeatBehindPassengerDataEvent.parent = WDomEvent.prototype; // our "super" property
+    SeatBehindPassengerDataEvent.prototype.initSeatBehindPassengerDataEvent = function (sbpData) {
+        this.seatbehindpassenger = sbpData.bp;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        SeatBehindPassengerDataEvent.parent.initEvent.call(this, 'seatbehindpassenger', null, null, null, false, false, stamp);
+    }
+
+//------------Relevant Objects for Tire Pressure Data-------------
+      TirePressureDataEvent = function (tpData) {
+        this.initTirePressureDataEvent(tpData);
+    }
+    TirePressureDataEvent.prototype = new WDomEvent();
+    TirePressureDataEvent.prototype.constructor = ShiftEvent;
+    TirePressureDataEvent.parent = WDomEvent.prototype; // our "super" property
+    TirePressureDataEvent.prototype.initTirePressureDataEvent = function (tpData) {
+        this.frontleft = tpData.fl;
+        this.frontright = tpData.fr;
+        this.rearleft = tpData.rl;
+        this.rearright = tpData.rr;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        TirePressureDataEvent.parent.initEvent.call(this, 'tirepressure', null, null, null, false, false, stamp);
+    }
+
+//------------Relevant Objects for Climate Data-------------
+       ClimateAllDataEvent = function (callData) {
+        this.initClimateAllDataEvent(callData);
+    }
+    ClimateAllDataEvent.prototype = new WDomEvent();
+    ClimateAllDataEvent.prototype.constructor = ShiftEvent;
+    ClimateAllDataEvent.parent = WDomEvent.prototype; // our "super" property
+    ClimateAllDataEvent.prototype.initClimateAllDataEvent = function (callData) {
+        this.calltemp = callData.dt;
+        this.callac = callData.ac;
+        this.callvl = callData.vl;
+        this.callvm = callData.vm;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        ClimateAllDataEvent.parent.initEvent.call(this, 'climateall', null, null, null, false, false, stamp);
+    }
+
+      ClimateDriverDataEvent = function (cdData) {
+        this.initClimateDriverDataEvent(cdData);
+    }
+    ClimateDriverDataEvent.prototype = new WDomEvent();
+    ClimateDriverDataEvent.prototype.constructor = ShiftEvent;
+    ClimateDriverDataEvent.parent = WDomEvent.prototype; // our "super" property
+    ClimateDriverDataEvent.prototype.initClimateDriverDataEvent = function (cdData) {
+        this.cdtemp = cdData.dt;
+        this.cdac = cdData.ac;
+        this.cdvl = cdData.vl;
+        this.cdvm = cdData.vm;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        ClimateDriverDataEvent.parent.initEvent.call(this, 'climatedriver', null, null, null, false, false, stamp);
+    }
+
+      ClimateFrontPassengerDataEvent = function (cfpData) {
+        this.initClimateFrontPassengerDataEvent(cfpData);
+    }
+    ClimateFrontPassengerDataEvent.prototype = new WDomEvent();
+    ClimateFrontPassengerDataEvent.prototype.constructor = ShiftEvent;
+    ClimateFrontPassengerDataEvent.parent = WDomEvent.prototype; // our "super" property
+    ClimateFrontPassengerDataEvent.prototype.initClimateFrontPassengerDataEvent = function (cfpData) {
+        this.cfptemp = cfpData.dt;
+        this.cfpac = cfpData.ac;
+        this.cfpvl = cfpData.vl;
+        this.cfpvm = cfpData.vm;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        ClimateFrontPassengerDataEvent.parent.initEvent.call(this, 'climatefrontpassenger', null, null, null, false, false, stamp);
+    }
+
+      ClimateBehindDriverDataEvent = function (cbdData) {
+        this.initClimateBehindDriverDataEvent(cbdData);
+    }
+    ClimateBehindDriverDataEvent.prototype = new WDomEvent();
+    ClimateBehindDriverDataEvent.prototype.constructor = ShiftEvent;
+    ClimateBehindDriverDataEvent.parent = WDomEvent.prototype; // our "super" property
+    ClimateBehindDriverDataEvent.prototype.initClimateBehindDriverDataEvent = function (cbdData) {
+        this.cbdtemp = cbdData.dt;
+        this.cbdac = cbdData.ac;
+        this.cbdvl = cbdData.vl;
+        this.cbdvm = cbdData.vm;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        ClimateBehindDriverDataEvent.parent.initEvent.call(this, 'climatebehinddriver', null, null, null, false, false, stamp);
+    }
+
+      ClimateBehindPassengerDataEvent = function (cbpData) {
+        this.initClimateBehindPassengerDataEvent(cbpData);
+    }
+    ClimateBehindPassengerDataEvent.prototype = new WDomEvent();
+    ClimateBehindPassengerDataEvent.prototype.constructor = ShiftEvent;
+    ClimateBehindPassengerDataEvent.parent = WDomEvent.prototype; // our "super" property
+    ClimateBehindPassengerDataEvent.prototype.initClimateBehindPassengerDataEvent = function (cbpData) {
+        this.cbptemp = cbpData.dt;
+        this.cbpac = cbpData.ac;
+        this.cbpvl = cbpData.vl;
+        this.cbpvm = cbpData.vm;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        ClimateBehindPassengerDataEvent.parent.initEvent.call(this, 'climatebehindpassenger', null, null, null, false, false, stamp);
     }
 
     function Address(country, region, county, city, street, streetNumber, premises, additionalInformation, postalCode) {
@@ -365,6 +543,64 @@
     var eoData = new Object();
     eoData.l = "MEASURING";
 
+    //Interfaces Data
+    var idData = new Object();
+    idData.fl = "cng";
+    idData.hd = "full";
+    idData.sw = "straight";
+    idData.vt = "transmission-manual";
+    
+    //seat Data
+    var sdData = new Object();
+    sdData.d = "side-cushion";
+    
+    var sfpData = new Object();
+    sfpData.fp = "side-cushion";
+
+    var sbdData = new Object();
+    sbdData.bd = "side-cushion";
+
+    var sbpData = new Object();
+    sbpData.bp = "side-cushion";
+
+    //Tire Pressure Data
+    var tpData = new Object();
+    tpData.fl = 2.2;
+    tpData.fr = 2.2;
+    tpData.rl = 2.6;
+    tpData.rr = 2.6;
+
+    //Climate Data
+    var callData = new Object();
+    callData.dt = 25;
+    callData.ac = "OFF";
+    callData.vl = 9;
+    callData.vm = "OFF";    
+
+    var cdData = new Object();
+    cdData.dt = 25;
+    cdData.ac = "OFF";
+    cdData.vl = 9;
+    cdData.vm = "OFF";
+
+    var cfpData = new Object();
+    cfpData.dt = 25;
+    cfpData.ac = "OFF";
+    cfpData.vl = 9;
+    cfpData.vm = "OFF";
+
+    var cbdData = new Object();
+    cbdData.dt = 25;
+    cbdData.ac = "OFF";
+    cbdData.vl = 9;
+    cbdData.vm = "OFF";
+
+    var cbpData = new Object();
+    cbpData.dt = 25;
+    cbpData.ac = "OFF";
+    cbpData.vl = 9;
+    cbpData.vm = "OFF";
+
     //LIGHTS
     var lfrData = false;
     var lffData = false;
@@ -436,6 +672,83 @@
         console.log(data);
         if (typeof _listeners.engineoil != 'undefined') {
             _listeners.engineoil(new EngineOilDataEvent(wsData));
+        }
+    }
+    everyone.now.setInterfacesData = function (data) {
+        idData = data;
+        console.log(data);
+        if (typeof _listeners.interfaces != 'undefined') {
+            _listeners.interfaces(new InterfacesDataEvent(idData));
+        }
+    }
+    everyone.now.setSeatDriverData = function (data) {
+        sdData = data;
+        console.log(data);
+        if (typeof _listeners.seatdriver != 'undefined') {
+            _listeners.seatdriver(new SeatDriverDataEvent(sdData));
+        }
+    }
+    everyone.now.setSeatFrontPassengerData = function (data) {
+        sfpData = data;
+        console.log(data);
+        if (typeof _listeners.seatfrontpassenger != 'undefined') {
+            _listeners.seatfrontpassenger(new SeatFrontPassengerDataEvent(sfpData));
+        }
+    }
+    everyone.now.setSeatBehindDriverData = function (data) {
+        sbdData = data;
+        console.log(data);
+        if (typeof _listeners.seatbehinddriver != 'undefined') {
+            _listeners.seatbehinddriver(new SeatBehindDriverDataEvent(sbdData));
+        }
+    }
+    everyone.now.setSeatBehindPassengerData = function (data) {
+        sbpData = data;
+        console.log(data);
+        if (typeof _listeners.seatbehindpassenger != 'undefined') {
+            _listeners.seatbehindpassenger(new SeatBehindPassengerDataEvent(sbpData));
+        }
+    }
+    everyone.now.setTirePressureData = function (data) {
+        tpData = data;
+        console.log(data);
+        if (typeof _listeners.tirepressure != 'undefined') {
+            _listeners.tirepressure(new TirePressureDataEvent(tpData));
+        }
+    }
+    everyone.now.setClimateAllData = function (data) {
+        callData = data;
+        console.log(data);
+        if (typeof _listeners.climateall != 'undefined') {
+            _listeners.climateall(new ClimateAllDataEvent(callData));
+        }
+    }
+    everyone.now.setClimateDriverData = function (data) {
+        cdData = data;
+        console.log(data);
+        if (typeof _listeners.climatedriver != 'undefined') {
+            _listeners.climatedriver(new ClimateDriverDataEvent(cdData));
+        }
+    }
+    everyone.now.setClimateFrontPassengerData = function (data) {
+        cfpData = data;
+        console.log(data);
+        if (typeof _listeners.climatefrontpassenger != 'undefined') {
+            _listeners.climatefrontpassenger(new ClimateFrontPassengerDataEvent(cfpData));
+        }
+    }
+    everyone.now.setClimateBehindDriverData = function (data) {
+        cbdData = data;
+        console.log(data);
+        if (typeof _listeners.climatebehinddriver != 'undefined') {
+            _listeners.climatebehinddriver(new ClimateBehindDriverDataEvent(cbdData));
+        }
+    }
+    everyone.now.setClimateBehindPassengerData = function (data) {
+        cbpData = data;
+        console.log(data);
+        if (typeof _listeners.climatebehindpassenger != 'undefined') {
+            _listeners.climatebehindpassenger(new ClimateBehindPassengerDataEvent(cbpData));
         }
     }
     everyone.now.setPsFront = function (data) {
@@ -564,6 +877,39 @@
             case 'window':
                 return new WindowDataEvent(wdData);
                 break;
+            case 'interfaces':
+                return new InterfacesDataEvent(idData);
+                break;
+            case 'seatdriver':
+                return new SeatDriverDataEvent(sdData);
+                break;
+            case 'seatfrontpassenger':
+                return new SeatFrontPassengerDataEvent(sfpData);
+                break;
+            case 'seatbehinddriver':
+                return new SeatBehindDriverDataEvent(sbdData);
+                break;
+            case 'seatbehindpassenger':
+                return new SeatBehindPassengerDataEvent(sbpData);
+                break;
+            case 'tirepressure':
+                return new TirePressureDataEvent(tpData);
+                break;
+            case 'climateall':
+                return new ClimateAllDataEvent(callData);
+                break;
+            case 'climatedriver':
+                return new ClimateDriverDataEvent(cdData);
+                break;
+            case 'climatefrontpassenger':
+                return new ClimateFrontPassengerDataEvent(cfpData);
+                break;
+            case 'climatebehinddriver':
+                return new ClimateBehindDriverDataEvent(cbdData);
+                break;
+            case 'climatebehindpassenger':
+                return new ClimateBehindPassengerDataEvent(cbpData);
+                break;
             case 'parksensors-front':
                 return new ParkSensorEvent(type, psfData);
                 break;
@@ -625,6 +971,39 @@
                 break;
             case 'engineoil':
                 _listeners.engineoil = listener;
+                break;
+            case 'interfaces':
+                _listeners.interfaces = listener;
+                break;
+            case 'seatdriver':
+                _listeners.seatdriver = listener;
+                break;
+            case 'seatfrontpassenger':
+                _listeners.seatfrontpassenger = listener;
+                break;
+            case 'seatbehinddriver':
+                _listeners.seatbehinddriver = listener;
+                break;
+            case 'seatbehindpassenger':
+                _listeners.seatbehindpassenger = listener;
+                break;
+            case 'tirepressure':
+                _listeners.tirepressure = listener;
+                break;
+            case 'climateall':
+                _listeners.climateall = listener;
+                break;
+            case 'climatedriver':
+                _listeners.climatedriver = listener;
+                break;
+            case 'climatefrontpassenger':
+                _listeners.climatefrontpassenger = listener;
+                break;
+            case 'climatebehinddriver':
+                _listeners.climatebehinddriver = listener;
+                break;
+            case 'climatebehindpassenger':
+                _listeners.climatebehindpassenger = listener;
                 break;
             case 'parksensors-front':
                 _listeners.parksensorsFront = listener;

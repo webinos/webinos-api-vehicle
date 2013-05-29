@@ -24,6 +24,9 @@
   ,	"bluetooth-obd": "0.1.0"
   , "serial-obd": "0.1.0"
   }
+, "devDependencies": { 
+    "webinos-jsonrpc2": "*"
+  }
 , "bundleDependencies":
   [ "events"
   , "fs"
