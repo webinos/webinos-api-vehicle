@@ -578,9 +578,6 @@ $(document).ready(function () {
       case "wiper":
         return handleWiperData;
         break;
-    /*  case "engineoil":
-        return handleStatus;
-        break;
       case "rpm":
         return handleRPMData;
         break;
@@ -590,8 +587,6 @@ $(document).ready(function () {
       case "load_pct":
         return handleEngineLoadData;
         break;
-      case "windows":
-        return handleGeneric; */
       case "window":
         return handleWindowData;
         break;
