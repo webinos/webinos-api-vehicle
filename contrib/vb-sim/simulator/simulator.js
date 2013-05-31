@@ -270,7 +270,72 @@ $(document).ready(function () {
       setWindowData();
     }
   }); 
-  //--------------------------------
+ //---------Climate Data-----------
+  $("#slider-call-vl").slider({
+    range: "min",
+    value: 0,
+    min: 1,
+    max: 9,
+    slide: function (event, ui) {
+      $("#call-vl").val(ui.value);
+    },
+    stop: function (event, ui) {
+      setClimateAllData();
+    }
+  });
+
+  $("#slider-cd-vl").slider({
+    range: "min",
+    value: 0,
+    min: 1,
+    max: 9,
+    slide: function (event, ui) {
+      $("#cd-vl").val(ui.value);
+    },
+    stop: function (event, ui) {
+      setClimateDriverData();
+    }
+  });
+
+  $("#slider-cfp-vl").slider({
+    range: "min",
+    value: 0,
+    min: 1,
+    max: 9,
+    slide: function (event, ui) {
+      $("#cfp-vl").val(ui.value);
+    },
+    stop: function (event, ui) {
+      setClimateFrontPassengerData();
+    }
+  });
+
+  $("#slider-cbd-vl").slider({
+    range: "min",
+    value: 0,
+    min: 1,
+    max: 9,
+    slide: function (event, ui) {
+      $("#cbd-vl").val(ui.value);
+    },
+    stop: function (event, ui) {
+      setClimateBehindDriverData();
+    }
+  });
+ 
+  $("#slider-cbp-vl").slider({
+    range: "min",
+    value: 0,
+    min: 1,
+    max: 9,
+    slide: function (event, ui) {
+      $("#cbp-vl").val(ui.value);
+    },
+    stop: function (event, ui) {
+      setClimateBehindPassengerData();
+    }
+  });
+ //----------------------------------
 
   if (navigator.geolocation) {
     $('#myLocation').removeAttr('disabled');
@@ -344,10 +409,110 @@ $(document).ready(function () {
   $('#ws-p').change(function () {
     setWiperData();
   });
-  //---------Engine Oil Data---
+  //--------Engine Oil Data---
   $('#eo-l').change(function () {
     setEngineOilData();
   });
+  //--------Interfaces Data-----
+  $('#id-fl').change(function () {
+    setInterfacesData();
+  });
+  $('#id-hd').change(function () {
+    setInterfacesData();
+  });
+  $('#id-sw').change(function () {
+    setInterfacesData();
+  });
+  $('#id-vt').change(function () {
+    setInterfacesData();
+  });  
+  //--------Seat Data----------
+  $('#sd-d').change(function () {
+    setSeatDriverData();
+  });
+  $('#sfp-fp').change(function () {
+    setSeatFrontPassengerData();
+  });
+  $('#sbd-bd').change(function () {
+    setSeatBehindDriverData();
+  });
+  $('#sbp-bp').change(function () {
+    setSeatBehindPassengerData();
+  });
+  //-------Tire Pressure Data------
+  $('#tp-fl').change(function () {
+    setTirePressureData();
+  });
+  $('#tp-fr').change(function () {
+    setTirePressureData();
+  });
+  $('#tp-rl').change(function () {
+    setTirePressureData();
+  });
+  $('#tp-rr').change(function () {
+    setTirePressureData();
+  });  
+  //-------Climate Control Data------
+  $('#call-dt').change(function () {
+    setClimateAllData();
+  });
+  $('#call-ac').change(function () {
+    setClimateAllData();
+  });
+  $('#call-vl').change(function () {
+    setClimateAllData();
+  });
+  $('#call-vm').change(function () {
+    setClimateAllData();
+  });
+  $('#cd-dt').change(function () {
+    setClimateDriverData();
+  });
+  $('#cd-ac').change(function () {
+    setClimateDriverData();
+  });
+  $('#cd-vl').change(function () {
+    setClimateDriverData();
+  });
+  $('#cd-vm').change(function () {
+    setClimateDriverData();
+  });
+  $('#cfp-dt').change(function () {
+    setClimateFrontPassengerData();
+  });
+  $('#cfp-ac').change(function () {
+    setClimateFrontPassengerData();
+  });
+  $('#cfp-vl').change(function () {
+    setClimateFrontPassengerData();
+  });
+  $('#cfp-vm').change(function () {
+    setClimateFrontPassengerData();
+  });
+  $('#cbd-dt').change(function () {
+    setClimateBehindDriverData();
+  });
+  $('#cbd-ac').change(function () {
+    setClimateBehindDriverData();
+  });
+  $('#cbd-vl').change(function () {
+    setClimateBehindDriverData();
+  });
+  $('#cbd-vm').change(function () {
+    setClimateBehindDriverData();
+  });
+  $('#cbp-dt').change(function () {
+    setClimateBehindPassengerData();
+  }); 
+  $('#cbp-ac').change(function () {
+    setClimateBehindPassengerData();
+  });  
+  $('#cbp-vl').change(function () {
+    setClimateBehindPassengerData();
+  });  
+  $('#cbp-vm').change(function () {
+    setClimateBehindPassengerData();
+  });   
   //---------Park Sensor-------
   $('#setPsFront').click(function () {
     setPsFront();
@@ -573,6 +738,97 @@ function setEngineOilData() {
   var eoData = new Object();
   eoData.l = $('#eo-l').val();
   now.setEngineOilData(eoData);
+}
+
+//------------Interfaces Data--------
+function setInterfacesData() {
+  var idData = new Object();
+  idData.fl = $('#id-fl').val();
+  idData.hd = $('#id-hd').val();
+  idData.sw = $('#id-sw').val();
+  idData.vt = $('#id-vt').val();
+  now.setInterfacesData(idData);
+}
+
+//------------Seat Data-------------
+function setSeatDriverData() {
+  var sdData = new Object();
+  sdData.d = $('#sd-d').val();
+  now.setSeatDriverData(sdData);
+}
+
+function setSeatFrontPassengerData() {
+  var sfpData = new Object();
+  sfpData.fp = $('#sfp-fp').val();
+  now.setSeatFrontPassengerData(sfpData);
+}
+
+function setSeatBehindDriverData() {
+  var sbdData = new Object();
+  sbdData.bd = $('#sbd-bd').val();
+  now.setSeatBehindDriverData(sbdData);
+}
+
+function setSeatBehindPassengerData() {
+  var sbpData = new Object();
+  sbpData.bp = $('#sbp-bp').val();
+  now.setSeatBehindPassengerData(sbpData);
+}
+
+//-----------Tire Pressure Data--------
+function setTirePressureData() {
+  var tpData = new Object();
+  tpData.fl = $('#tp-fl').val();
+  tpData.fr = $('#tp-fr').val();
+  tpData.rl = $('#tp-rl').val();
+  tpData.rr = $('#tp-rr').val();
+  now.setTirePressureData(tpData);
+}
+
+//------------Climate Control Data-------------
+function setClimateAllData() {
+  var callData = new Object();
+  callData.dt = $('#call-dt').val();
+  callData.ac = $('#call-ac').val();
+  callData.vl = $('#call-vl').val();
+  callData.vm = $('#call-vm').val();
+  now.setClimateAllData(callData);
+}
+
+function setClimateDriverData() {
+  var cdData = new Object();
+  cdData.dt = $('#cd-dt').val();
+  cdData.ac = $('#cd-ac').val();
+  cdData.vl = $('#cd-vl').val();
+  cdData.vm = $('#cd-vm').val();
+  now.setClimateDriverData(cdData);
+}
+
+function setClimateFrontPassengerData() {
+  var cfpData = new Object();
+  cfpData.dt = $('#cfp-dt').val();
+  cfpData.ac = $('#cfp-ac').val();
+  cfpData.vl = $('#cfp-vl').val();
+  cfpData.vm = $('#cfp-vm').val();
+  now.setClimateFrontPassengerData(cfpData);
+}
+
+function setClimateBehindDriverData() {
+  var cbdData = new Object();
+  cbdData.dt = $('#cbd-dt').val();
+  cbdData.ac = $('#cbd-ac').val();
+  cbdData.vl = $('#cbd-vl').val();
+  cbdData.vm = $('#cbd-vm').val();
+  now.setClimateBehindDriverData(cbdData);
+}
+
+function setClimateBehindPassengerData() {
+  var cbpData = new Object();
+  cbpData.dt = $('#cbp-dt').val();
+  cbpData.ac = $('#cbp-ac').val();
+  cbpData.vl = $('#cbp-vl').val();
+  cbpData.vm = $('#cbp-vm').val();
+  now.setClimateBehindPassengerData(cbpData);
 }
 
 function updateAddress(address) {
