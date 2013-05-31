@@ -191,44 +191,7 @@
         </p>
         <input type='button' id='setDeviceMotion' value="Fire DeviceMotion" />
        
-       <h3>Door Data</h3>
-        <p>
-          <label class='select'>driver:</label>
-          <select id="dd-d">
-            <option value='true'>Opened</option>
-            <option value='false' selected>Closed</option>
-          </select>
-        </p>
-       <p>
-          <label class='select'>frontPassenger:</label>
-          <select id="dd-fp">
-            <option value='true'>Opened</option>
-            <option value='false' selected>Closed</option>
-          </select>
-        </p>
-        <p>
-          <label class='select'>behindDriver:</label>
-          <select id="dd-bd">
-            <option value='true'>Opened</option>
-            <option value='false' selected>Closed</option>
-          </select>
-        </p>
-        <p>
-          <label class='select'>behindPassenger:</label>
-          <select id="dd-bp">
-            <option value='true'>Opened</option>
-            <option value='false' selected>Closed</option>
-          </select>
-        </p>
-        <p>
-          <label class='select'>trunkDeck:</label>
-          <select id="dd-td">
-            <option value='true'>Opened</option>
-            <option value='false' selected>Closed</option>
-          </select>
-        </p>
-        <input type='button' id='setDoorData' value="Set Door Data" />
-
+       
       <!-- Window Data -->
       <h3>Window Data </h3>
         <p>
@@ -242,54 +205,208 @@
           <div id="slider-wd-fp"></div>
         </p>
         <p>
-          <label>Behind Driver</label>
+          <label>Behind Driver:</label>
           <input type='text' value='0' id='wd-bd'>
           <div id="slider-wd-bd"></div>
         </p>
         <p>
-          <label>Behind Passenger</label>
+          <label>Behind Passenger:</label>
           <input type='text' value='0' id='wd-bp'>
         </p>
         <div id="slider-wd-bp"></div>
         <input type='button' id='setWindowData' value="Set Window Data" />
-       <!--Window Data End-->
-
-       <!--Wiper Data-->
-        <h3>Wiper Data </h3>
+        <!--Window Data End-->
+ 
+        <!--Seat Data-->
+        <h4>Seat Data </h4>
         <p>
-          <label class='select'>Wiper Data:</label>
-          <select id="ws-p">
-            <option value='front-wash'>front-wash</option>
-            <option value='rear-wash'>rear-wash</option>
-            <option value='automatic'>automatic</option>
-            <option value='front-once'>front-once</option>
-            <option value='rear-once'>rear-once</option>
-            <option value='front-level1'>front-level1</option>
-            <option value='front-level2'>front-level2</option>
-            <option value='notactive' selected>notactive</option>
+          <label class='select'>Driver:</label>
+          <select id="sd-d">
+            <option value='recline-seatback'>recline-seatback</option>
+            <option value='slide'>slide</option>
+            <option value='cushion-heigh'>cushion-heigh</option>
+            <option value='headrest'>headrest</option>
+            <option value='back-cushion'>back-cushion</option>
+            <option value='side-cushion' selected>side-cushion</option>
           </select>
-        <p>
-        <input type='button' id='setWiperData' value="Set Wiper Data" />
-       <!--Wiper Data End-->
+        </p>
+        <input type='button' id='setSeatDriverData' value="Set Seat Driver Data" />
 
-       <!--Engine Oil Data-->
-        <h3>Engine Oil Data </h3>
         <p>
-          <label class='select'>Engine Oil Data:</label>
-          <select id="eo-l">
-            <option value='OVER_MAX'>OVER_MAX</option>
-            <option value='MAX'>MAX</option>
-            <option value='OK'>OK</option>
-            <option value='MIN'>MIN</option>
-            <option value='UNDER_MIN'>UNDER_MIN</option>
-            <option value='MEASURING' selected>MEASURING</option>
+          <label class='select'>Front Passenger:</label>
+          <select id="sfp-fp">
+            <option value='recline-seatback'>recline-seatback</option>
+            <option value='slide'>slide</option>
+            <option value='cushion-heigh'>cushion-heigh</option>
+            <option value='headrest'>headrest</option>
+            <option value='back-cushion'>back-cushion</option>
+            <option value='side-cushion' selected>side-cushion</option>
           </select>
+        </p>
+        <input type='button' id='setSeatFrontPassengerData' value="Set Seat Front Passenger Data" />
+        
         <p>
-        <input type='button' id='setEngineOilData' value="Set Engine Oil Data" />
-       <!--Engine Oil Data End-->
+          <label class='select'>Behind Driver:</label>
+          <select id="sbd-bd">
+            <option value='recline-seatback'>recline-seatback</option>
+            <option value='slide'>slide</option>
+            <option value='cushion-heigh'>cushion-heigh</option>
+            <option value='headrest'>headrest</option>
+            <option value='back-cushion'>back-cushion</option>
+            <option value='side-cushion' selected>side-cushion</option>
+          </select>
+        </p>
+        <input type='button' id='setSeatBehindDriverData' value="Set Seat Behind Driver Data" />
+
+        <p>
+          <label class='select'>Behind Passenger:</label>
+          <select id="sbp-bp">
+            <option value='recline-seatback'>recline-seatback</option>
+            <option value='slide'>slide</option>
+            <option value='cushion-heigh'>cushion-heigh</option>
+            <option value='headrest'>headrest</option>
+            <option value='back-cushion'>back-cushion</option>
+            <option value='side-cushion' selected>side-cushion</option>
+          </select>
+        </p>
+        <input type='button' id='setSeatBehindPassengerData' value="Set Seat Behind Passenger Data" />
+       <!--Seat Data End--> 
+
+        <!--Climate Data-->
+        <h3>Climate All Data </h3>
+         <p>
+          <label>Temperature:</label>
+          <input type='text' value='25' id='call-dt'>
+        </p>
+        <p>
+          <label class='select'>AC Status:</label>
+          <select id="call-ac">
+            <option value='ON'>ON</option>
+            <option value='OFF' selected>OFF</option>
+          </select>
+        </p>
+        <p>
+          <label for="call-vl">VentLevel:</label>
+          <input type='text' value='9' id='call-vl'>
+          <div id="slider-call-vl"></div>
+        </p>
+        <p>
+          <label class='select'>Auto VentMode:</label>
+          <select id="call-vm">
+            <option value='ON'>ON</option>           
+            <option value='OFF' selected>OFF</option>
+          </select>
+        </p>      
+        <input type='button' id='setClimateAllData' value="Set Climate All Data" />
+               
+
+        <h3>Climate Driver Data </h3>       
+         <p>
+          <label>Temperature:</label>
+          <input type='text' value='25' id='cd-dt'>
+        </p>
+        <p>
+          <label class='select'>AC Status:</label>
+          <select id="cd-ac">
+            <option value='ON'>ON</option>
+            <option value='OFF' selected>OFF</option>
+          </select>
+        </p>
+        <p>
+          <label for="cd-vl">VentLevel:</label>
+         <input type='text' value='9' id='cd-vl'>
+          <div id="slider-cd-vl"></div>
+        </p>
+        <p>
+          <label class='select'>Auto VentMode:</label>
+          <select id="cd-vm">
+            <option value='ON'>ON</option>           
+            <option value='OFF' selected>OFF</option>
+          </select>
+        </p>      
+        <input type='button' id='setClimateDriverData' value="Set Climate Driver Data" />
 
 
+       <h3>Climate Front Passenger Data</h3>
+         <p>
+          <label>Temperature:</label>
+          <input type='text' value='25' id='cfp-dt'>
+        </p>
+        <p>
+          <label class='select'>AC Status:</label>
+          <select id="cfp-ac">
+            <option value='ON'>ON</option>
+            <option value='OFF' selected>OFF</option>
+          </select>
+        </p>
+        <p>
+          <label for="cfp-vl">VentLevel:</label>
+          <input type='text' value='9' id='cfp-vl'>
+          <div id="slider-cfp-vl"></div>
+        </p>
+        <p>
+          <label class='select'>Auto VentMode:</label>
+          <select id="cfp-vm">
+            <option value='ON'>ON</option>           
+            <option value='OFF' selected>OFF</option>
+          </select>
+        </p>      
+        <input type='button' id='setClimateFrontPassengerData' value="Set Climate Front Passenger Data" />
        
+
+        <h3>Climate Behind Driver Data</h3>
+         <p>
+          <label>Temperature:</label>
+          <input type='text' value='25' id='cbd-dt'>
+        </p>
+        <p>
+          <label class='select'>AC Status:</label>
+          <select id="cbd-ac">
+            <option value='ON'>ON</option>
+            <option value='OFF' selected>OFF</option>
+          </select>
+        </p>
+        <p>
+          <label for="cbd-vl">VentLevel:</label>
+          <input type='text' value='9' id='cbd-vl'>
+          <div id="slider-cbd-vl"></div>
+        </p>
+        <p>
+          <label class='select'>Auto VentMode:</label>
+          <select id="cbd-vm">
+            <option value='ON'>ON</option>           
+            <option value='OFF' selected>OFF</option>
+          </select>
+        </p>      
+        <input type='button' id='setClimateBehindDriverData' value="Set Climate Behind Driver Data" />
+        
+
+        <h3>Climate Behind Passenger Data</h3>
+         <p>
+          <label>Temperature:</label>
+          <input type='text' value='25' id='cbp-dt'>
+        </p>
+        <p>
+          <label class='select'>AC Status:</label>
+          <select id="cbp-ac">
+            <option value='ON'>ON</option>
+            <option value='OFF' selected>OFF</option>
+          </select>
+        </p>
+        <p>
+          <label>VentLevel:</label>
+          <input type='text' value='9' id='cbp-vl'>
+        </p>
+        <p>
+          <label class='select'>Auto VentMode:</label>
+          <select id="cbp-vm">
+            <option value='ON'>ON</option>           
+            <option value='OFF' selected>OFF</option>
+          </select>
+        </p>      
+        <input type='button' id='setClimateBehindPassengerData' value="Set Climate Behind Passenger Data" />
+       <!--Climate Data End--> 
+  
    <!--   <p>
           <label>Driver</label>
           <input type='radio' name="driver" value="Opened">
@@ -433,6 +550,140 @@
         <p>
           <input type='button' id='setLocation' value="Set Geolocation" />
         </p>
+
+      <!--Door Data-->
+      <h3>Door Data</h3>
+        <p>
+          <label class='select'>driver:</label>
+          <select id="dd-d">
+            <option value='true'>Opened</option>
+            <option value='false' selected>Closed</option>
+          </select>
+        </p>
+       <p>
+          <label class='select'>frontPassenger:</label>
+          <select id="dd-fp">
+            <option value='true'>Opened</option>
+            <option value='false' selected>Closed</option>
+          </select>
+        </p>
+        <p>
+          <label class='select'>behindDriver:</label>
+          <select id="dd-bd">
+            <option value='true'>Opened</option>
+            <option value='false' selected>Closed</option>
+          </select>
+        </p>
+        <p>
+          <label class='select'>behindPassenger:</label>
+          <select id="dd-bp">
+            <option value='true'>Opened</option>
+            <option value='false' selected>Closed</option>
+          </select>
+        </p>
+        <p>
+          <label class='select'>trunkDeck:</label>
+          <select id="dd-td">
+            <option value='true'>Opened</option>
+            <option value='false' selected>Closed</option>
+          </select>
+        </p>
+        <input type='button' id='setDoorData' value="Set Door Data" />
+
+       <!-- Tire Pressure Data -->
+       <h3>Tire Pressure Data (Val in Bars 1 to 2.8)</h3>
+        <p>
+          <label>Front Left (Max 2.4)</label>
+          <input type='text' value='2.2' id='tp-fl'>
+        </p>
+        <p>
+          <label>Front Right (Max 2.4)</label>
+          <input type='text' value='2.2' id='tp-fr'>
+        </p>
+        <p>
+          <label>Rear Left (Max 2.8)</label>
+          <input type='text' value='2.6' id='tp-rl'>
+        </p>
+        <p>
+          <label>Rear Right (Max 2.8)</label>
+          <input type='text' value='2.6' id='tp-rr'>
+        </p>
+        <input type='button' id='setTirePressureData' value="Set Tire Pressure Data" />
+       <!--Tire Pressure Data End-->
+
+       <!--Wiper Data-->
+        <h3>Wiper Data </h3>
+        <p>
+          <label class='select'>Wiper Data:</label>
+          <select id="ws-p">
+            <option value='front-wash'>front-wash</option>
+            <option value='rear-wash'>rear-wash</option>
+            <option value='automatic'>automatic</option>
+            <option value='front-once'>front-once</option>
+            <option value='rear-once'>rear-once</option>
+            <option value='front-level1'>front-level1</option>
+            <option value='front-level2'>front-level2</option>
+            <option value='notactive' selected>notactive</option>
+          </select>
+        <p>
+        <input type='button' id='setWiperData' value="Set Wiper Data" />
+       <!--Wiper Data End-->
+
+       <!--Engine Oil Data-->
+        <h3>Engine Oil Data </h3>
+        <p>
+          <label class='select'>Engine Oil Data:</label>
+          <select id="eo-l">
+            <option value='OVER_MAX'>OVER_MAX</option>
+            <option value='MAX'>MAX</option>
+            <option value='OK'>OK</option>
+            <option value='MIN'>MIN</option>
+            <option value='UNDER_MIN'>UNDER_MIN</option>
+            <option value='MEASURING' selected>MEASURING</option>
+          </select>
+        <p>
+        <input type='button' id='setEngineOilData' value="Set Engine Oil Data" />
+       <!--Engine Oil Data End-->
+
+       <!--Interfaces Data-->
+       <h4>Interfaces Data </h4>
+        <p>
+          <label class='select'>Fuel Data:</label>
+          <select id="id-fl">
+            <option value='unleaded'>unleaded</option>
+            <option value='premium'>premium</option>
+            <option value='diesel'>diesel</option>
+            <option value='electric'>electric</option>
+            <option value='cng' selected>cng</option>
+          </select>
+        </p>
+        <p>
+          <label class='select'>Hybrid Data:</label>
+          <select id="id-hd">
+            <option value='none'>none</option>
+            <option value='mild'>mild</option>
+            <option value='full' selected>full</option>
+          </select>
+        </p>
+        <p>
+          <label class='select'>Steering Wheel:</label>
+          <select id="id-sw">
+            <option value='right'>right</option>
+            <option value='left'>left</option>           
+            <option value='straight' selected>straight</option>
+          </select>
+        </p>
+        <p>
+          <label class='select'>V Transmission:</label>
+          <select id="id-vt">
+            <option value='transmission-automatic'>transmission-automatic</option>           
+            <option value='transmission-manual' selected>transmission-manual</option>
+          </select>
+        </p>      
+        <input type='button' id='setInterfacesData' value="Set Interfaces Data" />
+       <!--Interfaces Data End-->     
+
+     
       </div>
     </div>
   </body>

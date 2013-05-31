@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  * Copyright 2012 BMW AG
- * Copyright 2012 TU Mï¿½nchen
+ * Copyright 2012 TU München
  ******************************************************************************/ 
 var vehicle;
 var services;
@@ -45,20 +45,20 @@ $(document).ready(function () {
   vehicle = null;
   listeners = new Array(); //FOR VEHICLE EVENTS
   _vehicleDataIds = [{
-    type: 'climate-all',
-    supported: false
-  }, {
-    type: 'climate-driver',
+    type: 'climateall',
     supported: true
   }, {
-    type: 'climate-behind-driver',
-    supported: false
-  }, {
-    type: 'climate-passenger',
+    type: 'climatedriver',
     supported: true
   }, {
-    type: 'climate-behind-passenger',
-    supported: false
+    type: 'climatefrontpassenger',
+    supported: true
+  }, {
+    type: 'climatebehinddriver',
+    supported: true
+  }, {
+    type: 'climatebehindpassenger',
+    supported: true
   }, {
     type: 'light-fog-front',
     supported: true
@@ -100,7 +100,7 @@ $(document).ready(function () {
     supported: true
   }, {
     type: 'tirepressure',
-    supported: false
+    supported: true
   }, {
     type: 'door',
     supported: true
@@ -109,6 +109,21 @@ $(document).ready(function () {
     supported: true
   }, {
     type: 'engineoil',
+    supported: true
+  }, {
+    type: 'interfaces',
+    supported: true
+  }, {
+    type: 'seatdriver',
+    supported: true
+  }, {
+    type: 'seatfrontpassenger',
+    supported: true
+  }, {
+    type: 'seatbehinddriver',
+    supported: true
+  }, {
+    type: 'seatbehindpassenger',
     supported: true
   }, {
     type: 'rpm',
@@ -203,7 +218,112 @@ $(document).ready(function () {
     $('#vt_info').append("<p>Level: " + data.level + "</p>");
   }
   //---Handle Engine Oil Data Ends Here----//
- 
+
+  //Interfaces Data//
+  var handleInterfacesData = function (data) {
+    postMessage("info", "new Interfaces Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>Fuel: " + data.fuel + "</p>");
+    $('#vt_info').append("<p>Hybrid: " + data.hybrid + "</p>");
+    $('#vt_info').append("<p>Steeringwheel: " + data.steeringwheel + "</p>");
+    $('#vt_info').append("<p>VehicleTransmission: " + data.vehicletransmission + "</p>"); 
+  //   $('#vt_info').append("<p>Timestamp: " + data.timestamp + "</p>");
+  }
+  //---Handle Interfaces Data Ends Here----//
+
+  //Seat Data//
+  var handleSeatDriverData = function (data) {
+    postMessage("info", "new Seat Driver Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>Driver: " + data.seatdriver + "</p>");
+  }
+  
+  var handleSeatFrontPassengerData = function (data) {
+    postMessage("info", "new Seat Front Passenger Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>FrontPassenger: " + data.seatfrontpassenger + "</p>");
+  }
+   
+  var handleSeatBehindDriverData = function (data) {
+    postMessage("info", "new Seat Behind Driver Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>BehindDriver: " + data.seatbehinddriver + "</p>");
+  }
+
+  var handleSeatBehindPassengerData = function (data) {
+    postMessage("info", "new Seat Behind Passenger Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>BehindPassenger: " + data.seatbehindpassenger + "</p>");
+  }
+
+  //Tire Pressure Data//
+  var handleTirePressureData = function (data) {
+    postMessage("info", "new Tire Pressure Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>FrontLeft: " + data.frontleft + "</p>");
+    $('#vt_info').append("<p>FrontRight: " + data.frontright + "</p>");
+    $('#vt_info').append("<p>RearLeft: " + data.rearleft + "</p>");
+    $('#vt_info').append("<p>RearRight: " + data.rearright + "</p>"); 
+  //   $('#vt_info').append("<p>Timestamp: " + data.timestamp + "</p>");
+  }
+  //---Handle Tire Pressure Data Ends Here----//
+
+  //Climate Data//
+  var handleClimateAllData = function (data) {
+    postMessage("info", "new Climate All Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>desiredTemperature: " + data.calltemp + "</p>");
+    $('#vt_info').append("<p>acstatus: " + data.callac + "</p>");
+    $('#vt_info').append("<p>ventLevel: " + data.callvl + "</p>");
+    $('#vt_info').append("<p>ventMode: " + data.callvm + "</p>");
+  }
+
+  var handleClimateDriverData = function (data) {
+    postMessage("info", "new Climate Driver Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>desiredTemperature: " + data.cdtemp + "</p>");
+    $('#vt_info').append("<p>acstatus: " + data.cdac + "</p>");
+    $('#vt_info').append("<p>ventLevel: " + data.cdvl + "</p>");
+    $('#vt_info').append("<p>ventMode: " + data.cdvm + "</p>");
+  }
+  
+  var handleClimateFrontPassengerData = function (data) {
+    postMessage("info", "new Climate Front Passenger Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>desiredTemperature: " + data.cfptemp + "</p>");
+    $('#vt_info').append("<p>acstatus: " + data.cfpac + "</p>");
+    $('#vt_info').append("<p>ventLevel: " + data.cfpvl + "</p>");
+    $('#vt_info').append("<p>ventMode: " + data.cfpvm + "</p>");
+  }
+   
+  var handleClimateBehindDriverData = function (data) {
+    postMessage("info", "new Climate Behind Driver Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>desiredTemperature: " + data.cbdtemp + "</p>");
+    $('#vt_info').append("<p>acstatus: " + data.cbdac + "</p>");
+    $('#vt_info').append("<p>ventLevel: " + data.cbdvl + "</p>");
+    $('#vt_info').append("<p>ventMode: " + data.cbdvm + "</p>");
+  }
+
+  var handleClimateBehindPassengerData = function (data) {
+    postMessage("info", "new Climate Behind Passenger Data-Event received.");
+    $('#vt_info').empty();
+    console.log(data);
+    $('#vt_info').append("<p>desiredTemperature: " + data.cbptemp + "</p>");
+    $('#vt_info').append("<p>acstatus: " + data.cbpac + "</p>");
+    $('#vt_info').append("<p>ventLevel: " + data.cbpvl + "</p>");
+    $('#vt_info').append("<p>ventMode: " + data.cbpvm + "</p>");
+  }
   
   var handleNavigation = function (data) {
     postMessage("info", ".");
@@ -230,7 +350,7 @@ $(document).ready(function () {
     $('#vt_info').append("<p>Right: " + data.right + "</p>");
     $('#vt_info').append("<p>OutRight: " + data.outRight + "</p>");
   }
-  var handleClimateControlData = function (data) {
+  /*var handleClimateControlData = function (data) {
     postMessage("info", "new ClimateControlData received : " + data.zone);
     $('#vt_info').empty();
     $('#vt_info').append("<p>zone: " + data.zone + "</p>");
@@ -245,7 +365,7 @@ $(document).ready(function () {
     $('#vt_info').empty();
     $('#vt_info').append("<p>ControlID: " + data.controlId + "</p>");
     $('#vt_info').append("<p>Active: " + data.active + "</p>");
-  }
+  }*/
   var handleRPMData = function (event) {
     rpm = parseInt(event.rpm);
     postMessage("info", "new RPM-Event received.");
@@ -404,20 +524,23 @@ $(document).ready(function () {
       case "parksensors-rear":
         return handleParkSensorsData;
         break;
-      case "climate-all":
-        return handleClimateControlData;
+       case "tirepressure":
+        return handleTirePressureData;
         break;
-      case "climate-driver":
-        return handleClimateControlData;
+      case "climateall":
+        return handleClimateAllData;
         break;
-      case "climate-passenger":
-        return handleClimateControlData;
+      case "climatedriver":
+        return handleClimateDriverData;
         break;
-      case "climate-behind-driver":
-        return handleClimateControlData;
+      case "climatefrontpassenger":
+        return handleClimateFrontPassengerData;
         break;
-      case "climate-behind-passenger":
-        return handleClimateControlData;
+      case "climatebehinddriver":
+        return handleClimateBehindDriverData;
+        break;
+      case "climatebehindpassenger":
+        return handleClimateBehindPassengerData;
         break;
       case "light-fog-front":
         return handleLightWiperControlData;
@@ -455,9 +578,6 @@ $(document).ready(function () {
       case "wiper":
         return handleWiperData;
         break;
-      case "engineoil":
-        return handleStatus;
-        break;
       case "rpm":
         return handleRPMData;
         break;
@@ -467,10 +587,23 @@ $(document).ready(function () {
       case "load_pct":
         return handleEngineLoadData;
         break;
-      /*case "windows":
-        return handleGeneric; */
       case "window":
         return handleWindowData;
+        break;
+      case "interfaces":
+        return handleInterfacesData;
+        break;
+      case "seatdriver":
+        return handleSeatDriverData;
+        break;
+      case "seatfrontpassenger":
+        return handleSeatFrontPassengerData;
+        break;
+      case "seatbehinddriver":
+        return handleSeatBehindDriverData;
+        break;
+      case "seatbehindpassenger":
+        return handleSeatBehindPassengerData;
         break;
       case "engineoil":
         return handleEngineOilData;
