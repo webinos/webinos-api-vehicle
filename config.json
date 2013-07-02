@@ -1,12 +1,12 @@
 {
   "name": "vehicle",
   "params": {
-    "connector": "simulator",
+    "connector": "obd",
     "obdParams": {
         "type": "serial",
         "btAddress": "D8:0D:E3:80:19:B4",
         "btChannel": 14,
-        "serialPort": "/dev/rfcomm0",
+        "serialPort": "/dev/pts/5",
         "serialOptions": {
             "baudrate": 115200
         }

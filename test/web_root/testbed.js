@@ -131,7 +131,19 @@ $(document).ready(function () {
   }, {
     type: 'vss',
     supported: true
-  }, {
+  },  {
+    type: 'throttlepos',
+    supported: true
+ },   {
+    type: 'frp',
+    supported: true
+ },   {
+    type: 'temp',
+    supported: true
+ },   {
+    type: 'iat',
+    supported: true
+ },   {
     type: 'load_pct',
     supported: true
   }];
@@ -381,6 +393,26 @@ $(document).ready(function () {
     postMessage("info", "new EngineLoad-Event received.");
     $('#vt_info').html("Engine Load: <br />" + engineLoad + " %");
   };
+  var handleThrottlePosData = function (event) {
+    throttlepos = parseInt(event.throttlepos);
+    postMessage("info", "new ThrottlePos-Event received.");
+    $('#vt_info').html("ThrottlePos: <br />" + throttlepos);
+  };
+  var handleFuelPressureData = function (event) {
+    frp = parseInt(event.frp);
+    postMessage("info", "new FuelPressure-Event received.");
+    $('#vt_info').html("FuelPressure: <br />" + frp);
+  };
+  var handleTempData = function (event) {
+    temp = parseInt(event.temp);
+    postMessage("info", "new Temp-Event received.");
+    $('#vt_info').html("Temp: <br />" + temp);
+  };
+  var handleIatData = function (event) {
+    iat = parseInt(event.iat);
+    postMessage("info", "new Iat-Event received.");
+    $('#vt_info').html("Iat: <br />" + iat);
+  };
   var handleStatus = function (e) {
     $('#vt_info').empty();
     $('#vt_info').html(e.controlId + ": <br />" + e.status + "<br />Timestamp: " + e.timestamp);
@@ -586,6 +618,18 @@ $(document).ready(function () {
         break;
       case "load_pct":
         return handleEngineLoadData;
+        break;
+      case "throttlepos":
+        return handleThrottlePosData;
+        break;
+      case "frp":
+        return handleFuelPressureData;
+        break;
+      case "temp":
+        return handleTempData;
+        break;
+      case "iat":
+        return handleIatData;
         break;
       case "window":
         return handleWindowData;
