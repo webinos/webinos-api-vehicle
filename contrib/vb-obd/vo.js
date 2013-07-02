@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Copyright 2013 TNO
- * Author: Eric Smekens
+ * Copyright 2013 TNO - Author: Eric Smekens
+ * Copyright 2013 TU Munich - Author: Krishna Bangalore
  ******************************************************************************/
 
 (function () {
@@ -80,6 +80,62 @@
         EngineLoadEvent.parent.initEvent.call(this, 'load_pct', null, null, null, false, false, stamp);
     }
 
+    ThrottlePosEvent = function (throttleposData) {
+        this.initThrottlePosEvent(throttleposData);
+    }
+    ThrottlePosEvent.prototype = new WDomEvent();
+    ThrottlePosEvent.prototype.constructor = ThrottlePosEvent;
+    ThrottlePosEvent.parent = WDomEvent.prototype; // our "super" property
+    ThrottlePosEvent.prototype.initThrottlePosEvent = function (throttleposData) {
+        this.throttlepos = throttleposData;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        ThrottlePosEvent.parent.initEvent.call(this, 'throttlepos', null, null, null, false, false, stamp);
+    }
+
+    FuelPressureEvent = function (frpData) {
+        this.initFuelPressureEvent(frpData);
+    }
+    FuelPressureEvent.prototype = new WDomEvent();
+    FuelPressureEvent.prototype.constructor = FuelPressureEvent;
+    FuelPressureEvent.parent = WDomEvent.prototype; // our "super" property
+    FuelPressureEvent.prototype.initFuelPressureEvent = function (frpData) {
+        this.frp = frpData;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        FuelPressureEvent.parent.initEvent.call(this, 'frp', null, null, null, false, false, stamp);
+    }
+
+    TempEvent = function (tempData) {
+        this.initTempEvent(tempData);
+    }
+    TempEvent.prototype = new WDomEvent();
+    TempEvent.prototype.constructor = TempEvent;
+    TempEvent.parent = WDomEvent.prototype; // our "super" property
+    TempEvent.prototype.initTempEvent = function (tempData) {
+        this.temp = tempData;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        TempEvent.parent.initEvent.call(this, 'temp', null, null, null, false, false, stamp);
+    }
+
+    IatEvent = function (iatData) {
+        this.initIatEvent(iatData);
+    }
+    IatEvent.prototype = new WDomEvent();
+    IatEvent.prototype.constructor = IatEvent;
+    IatEvent.parent = WDomEvent.prototype; // our "super" property
+    IatEvent.prototype.initIatEvent = function (iatData) {
+        this.iat = iatData;
+        var d = new Date();
+        var stamp = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
+        var stamp = stamp + d.getUTCMilliseconds();
+        IatEvent.parent.initEvent.call(this, 'iat', null, null, null, false, false, stamp);
+    }
+
 
     var _listeners = {}; //Listener object
 
@@ -114,6 +170,26 @@
                 case "load_pct":
                     if (typeof _listeners.load_pct != 'undefined') {
                         _listeners.load_pct(new EngineLoadEvent(data.value));
+                    }
+                    break;
+                case "throttlepos":
+                    if (typeof _listeners.throttlepos != 'undefined') {
+                        _listeners.throttlepos(new ThrottlePosEvent(data.value));
+                    }
+                    break;
+                case "frp":
+                    if (typeof _listeners.frp != 'undefined') {
+                        _listeners.frp(new FuelPressureEvent(data.value));
+                    }
+                    break;
+                case "temp":
+                    if (typeof _listeners.temp != 'undefined') {
+                        _listeners.temp(new TempEvent(data.value));
+                    }
+                    break;
+                case "iat":
+                    if (typeof _listeners.iat != 'undefined') {
+                        _listeners.iat(new IatEvent(data.value));
                     }
                     break;
                 default:
@@ -160,6 +236,18 @@
                     case "load_pct":
                         callback(new EngineLoadEvent(data.value));
                         break;
+                    case "throttlepos":
+                        callback(new ThrottlePosEvent(data.value));
+                        break;
+                    case "frp":
+                        callback(new FuelPressureEvent(data.value));
+                        break;
+                    case "temp":
+                        callback(new TempEvent(data.value));
+                        break;
+                    case "iat":
+                        callback(new IatEvent(data.value));
+                        break;
                     default:
                         console.log('No supported pid yet.');
                         break;
@@ -201,6 +289,22 @@
                 _listeners.load_pct = listener;
                 shouldAdd = true;
                 break;
+            case 'throttlepos':
+                _listeners.throttlepos = listener;
+                shouldAdd = true;
+                break;
+            case 'frp':
+                _listeners.frp = listener;
+                shouldAdd = true;
+                break;
+            case 'temp':
+                _listeners.temp = listener;
+                shouldAdd = true;
+                break;
+            case 'iat':
+                _listeners.iat = listener;
+                shouldAdd = true;
+                break;
             default:
                 console.log('type ' + type + ' undefined.');
         }
@@ -226,6 +330,21 @@
                 break;
             case 'load_pct':
                 _listeners.load_pct = undefined;
+                shouldRemove = true;
+            case 'throttlepos':
+                _listeners.throttlepos = undefined;
+                shouldRemove = true;
+                break;
+            case 'frp':
+                _listeners.frp = undefined;
+                shouldRemove = true;
+                break;
+            case 'temp':
+                _listeners.temp = undefined;
+                shouldRemove = true;
+                break;
+            case 'iat':
+                _listeners.iat = undefined;
                 shouldRemove = true;
                 break;
             default:
