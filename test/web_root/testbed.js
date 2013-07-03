@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Copyright 2012 BMW AG
- * Copyright 2012 TU München
+ * Copyright 2012 BMW AG - Simon Isenberg
+ * Copyright 2012 TU München - Krishna Bangalore
  ******************************************************************************/ 
 var vehicle;
 var services;
@@ -362,22 +362,7 @@ $(document).ready(function () {
     $('#vt_info').append("<p>Right: " + data.right + "</p>");
     $('#vt_info').append("<p>OutRight: " + data.outRight + "</p>");
   }
-  /*var handleClimateControlData = function (data) {
-    postMessage("info", "new ClimateControlData received : " + data.zone);
-    $('#vt_info').empty();
-    $('#vt_info').append("<p>zone: " + data.zone + "</p>");
-    $('#vt_info').append("<p>desiredTemperature: " + data.desiredTemperature + "</p>");
-    $('#vt_info').append("<p>acstatus: " + data.acstatus + "</p>");
-    $('#vt_info').append("<p>ventLevel: " + data.ventLevel + "</p>");
-    $('#vt_info').append("<p>ventMode: " + data.ventMode + "</p>");
-  }
-  var handleLightWiperControlData = function (data) {
-    postMessage("info", "new ControlData received : " + data.controlId);
-    console.log(data);
-    $('#vt_info').empty();
-    $('#vt_info').append("<p>ControlID: " + data.controlId + "</p>");
-    $('#vt_info').append("<p>Active: " + data.active + "</p>");
-  }*/
+  
   var handleRPMData = function (event) {
     rpm = parseInt(event.rpm);
     postMessage("info", "new RPM-Event received.");

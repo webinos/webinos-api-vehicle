@@ -38,6 +38,7 @@
         this.timestamp = timestamp;
     }
 
+//-----Speed, RPM, Engine Load, Throttle Position, Temp, Air Temperature, Fuel Pressure----
     SpeedEvent = function (speedData) {
         this.initSpeedEvent(speedData);
     }
