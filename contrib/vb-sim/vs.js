@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Copyright 2012 BMW AG
- * Copyright 2012 TU München
+ * Copyright 2012 BMW AG - Simon Isenberg
+ * Copyright 2012 TU München - Krishna Bangalore
  ******************************************************************************/ 
 
 (function () {
@@ -857,6 +857,7 @@
         }
     }
 
+//-----Get the Type of Event-----
     function get(type) {
         switch (type) {
             case 'gear':
@@ -951,6 +952,7 @@
         }
     }
 
+//--------Add a Listener to it-----
     function addListener(type, listener) {
         console.log('registering listener ' + type);
         switch (type) {

@@ -13,8 +13,8 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *
-* Copyright 2012 BMW AG
-* Copyright 2012 TU München
+* Copyright 2012 BMW AG - Simon Isenberg
+* Copyright 2012 TU München - Krishna Bangalore
 ******************************************************************************/
 
 now.ready(function () {
