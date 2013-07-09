@@ -1,7 +1,7 @@
 {
   "name": "vehicle",
   "params": {
-    "connector": "obd",
+    "connector": "simulator",
     "obdParams": {
         "type": "serial",
         "btAddress": "D8:0D:E3:80:19:B4",

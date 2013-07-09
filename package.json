@@ -25,7 +25,9 @@
   , "serial-obd": ">=0.1.x"
   }
 , "devDependencies": { 
-    "webinos-jsonrpc2": "*"
+    "webinos-jsonrpc2": "*",
+    "zombie": "~2.0.0-alpha15",
+    "jasmine-node": "x.x.x"
   }
 , "bundleDependencies":
   [ "events"
@@ -33,5 +35,9 @@
   , "https"
   , "path"
   , "url"
-  ]
+  ], 
+  "scripts":{
+  "travis-api-test": "./test/tools/travis-test.sh"
 }
+}
+
