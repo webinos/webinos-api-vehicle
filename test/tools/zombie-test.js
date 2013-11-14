@@ -25,11 +25,7 @@ Browser.debug = false;
 
 browser = new Browser()
 
-//var apiName = "webinos-api-vehicle";
-//var pathToHtml = "../jasmine/SpecRunner.html";
-//var totalPath = "file:///" + __dirname + "/" + pathToHtml;
-
-var totalPath = "file://" + process.argv[2];
+var totalPath = "http://localhost:8080/webinos-api-vehicle/test/web_root/jasmine/AutomatedSpec.html";
 
 console.log("Visiting: " + totalPath);
 
