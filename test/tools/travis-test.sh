@@ -29,8 +29,7 @@ export API_DIR=`pwd`
 export TMP=~/tmp
 export WEBINOS_PZP_DIR=$TMP/webinos-pzp
 export TOOLS_DIR=$API_DIR/test/tools
-export API_TEST_NAME=SpecRunner.html
-export API_TEST_PATH=$API_DIR/test/jasmine/
+export API_TEST_PATH=$API_DIR/test/web_root/jasmine
 
 # move to a temporary directory 
 mkdir -p $TMP
