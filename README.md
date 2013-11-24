@@ -2,7 +2,7 @@
 
 **Service Type**: http://webinos.org/api/vehicle
 
-The main concept of vehicle API is to provide the interface between webinos and your car's CAN bus.
+The main concept of vehicle API is to provide the interface between webinos and your car's CAN bus. This API requires your car manufacturer to support webinos on your car. If you are looking for the universal ODBII experimental implementation, you should be looking in the [IoT sensors API](https://github.com/webinos/webinos-api-iot). 
 
 
 ## Installation ##
