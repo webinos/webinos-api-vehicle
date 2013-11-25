@@ -60,6 +60,37 @@ Alternatively you can use the webinos dashboard to allow the user choose the veh
 
 Once you have a reference to an instance of a service you can use the following methods:
 
+###get(vehicleDataId, callOnSuccess, callOnError)
+
+Vehicle event types defines the possible vehicle data, which can be retrieved using the get method.
+
+###addEventListener(vehicleDataId, eventHandler, capture)
+
+Vehicle addEventListener method defines the possible vehicle data, which can be retrieved continously.
+
+###removeEventListener(vehicleDataId, eventHandler, capture)
+
+Vehicle removeEventListener method defines the possible vehicle data, which can be removed.
+
+###POI(name, position, address)
+
+The dictionary contains the name of a POI and its address and/or geolocation as a LatLng object
+
+###Address(country, region, county, city, street, streetNumber, premises, additionalInformation, postalCode)
+
+Address method denotes the address of the POI.
+
+###LatLng(lat, lng)
+
+LatLng method contains geolocation as a LatLng object
+
+###requestGuidance(callOnSuccess, callOnError, destinations)
+
+address properties, which can be passed to the navigation system using the requestGuidance() function
+
+###findDestination(callOnSuccess, callOnError, search)
+
+finalDestination method queries the navigation system to retrieve POIs for a given search string.
 
 
 ## Links ##
