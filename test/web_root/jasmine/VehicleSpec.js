@@ -14,6 +14,7 @@
  * limitations under the License.
  *
  * Copyright 2012 BMW AG
+ * Copyright 2012 TU Munich
  ******************************************************************************/
 
 describe("Vehicle API", function() {
@@ -76,16 +77,16 @@ describe("Vehicle API", function() {
         expect(boundVehicleService.get).toEqual(jasmine.any(Function));
         
         //currently not implemented functions
-        expect(boundVehicleService.brand).toEqual(jasmine.any(String));
+     /*   expect(boundVehicleService.brand).toEqual(jasmine.any(String));
         expect(boundVehicleService.model).toEqual(jasmine.any(String));
         expect(boundVehicleService.year).toEqual(jasmine.any(String));
         expect(boundVehicleService.fuel).toEqual(jasmine.any(String));
-        expect(boundVehicleService.transmission).toEqual(jasmine.any(String));
+        expect(boundVehicleService.transmission).toEqual(jasmine.any(String));*/
     });
 
 
     
-    it("can get gear data", function() {
+    /*it("can get gear data", function() {
         var shiftEvent = null;
         
         boundVehicleService.get('shift', function(event){ shiftEvent=event;});
@@ -99,7 +100,7 @@ describe("Vehicle API", function() {
             expect(shiftEvent.gear).toEqual(jasmine.any(String));
             expect(shiftEvent.timestamp).toEqual(jasmine.any(Number));
         });
-    });
+    });*/
     
     it("can get trip computer data", function() {
         var evObj = null;
@@ -143,7 +144,7 @@ describe("Vehicle API", function() {
     });
     
     //not implemented for simulator
-    it("can get control data (e.g. lights)", function() {
+    /*it("can get control data (e.g. lights)", function() {
         var evObj = null;
         boundVehicleService.get('lights-fog-front', function(event){ evObj=event;});
         waitsFor(function() {
@@ -155,28 +156,97 @@ describe("Vehicle API", function() {
             expect(evObj.controlId).toEqual('lights-fog-front');
             expect(evObj.active).toEqual(jasmine.any(Boolean));
         });
-    });
+    });*/
 
-    //not implemented for simulator
-    it("can get climate data", function() {
+    //Implemented for simulator
+    it("can register and get climate Driver data", function() {
         var evObj = null;
-        boundVehicleService.get('climate-driver', function(event){ evObj=event;});
+        boundVehicleService.get('climatedriver', function(event){ evObj=event;});
         waitsFor(function() {
             return evObj;
         }, "onDelivery callback to be called. (not implemented)" , 3000);
 
         runs(function() {
             expect(evObj).toEqual(jasmine.any(Object));
-            expect(evObj.zone).toEqual('climate-driver');
-            expect(evObj.desiredTemperature).toEqual(jasmine.any(Number));
-            expect(evObj.acStatus).toEqual(jasmine.any(Boolean));
-            expect(evObj.ventLevel).toEqual(jasmine.any(Number));
-            expect(evObj.ventMode).toEqual(jasmine.any(Boolean));
+            expect(evObj.type).toEqual('climatedriver');
+            expect(evObj.cdtemp).toEqual(jasmine.any(Number));
+            expect(evObj.cdac).toEqual(jasmine.any(String));
+            expect(evObj.cdvl).toEqual(jasmine.any(Number));
+            expect(evObj.cdvm).toEqual(jasmine.any(String));
         });
     });
 
+    it("can register and get climate All data", function() {
+        var evObj = null;
+        boundVehicleService.get('climateall', function(event){ evObj=event;});
+        waitsFor(function() {
+            return evObj;
+        }, "onDelivery callback to be called. (not implemented)" , 3000);
 
-    it("can register and receive events on gear data", function() {
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('climateall');
+            expect(evObj.calltemp).toEqual(jasmine.any(Number));
+            expect(evObj.callac).toEqual(jasmine.any(String));
+            expect(evObj.callvl).toEqual(jasmine.any(Number));
+            expect(evObj.callvm).toEqual(jasmine.any(String));
+        });
+    });  
+
+     it("can register and get climate FrontPassenger data", function() {
+        var evObj = null;
+        boundVehicleService.get('climatefrontpassenger', function(event){ evObj=event;});
+        waitsFor(function() {
+            return evObj;
+        }, "onDelivery callback to be called. (not implemented)" , 3000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('climatefrontpassenger');
+            expect(evObj.cfptemp).toEqual(jasmine.any(Number));
+            expect(evObj.cfpac).toEqual(jasmine.any(String));
+            expect(evObj.cfpvl).toEqual(jasmine.any(Number));
+            expect(evObj.cfpvm).toEqual(jasmine.any(String));
+        });
+    });  
+
+
+     it("can register and get climate BehindDriver data", function() {
+        var evObj = null;
+        boundVehicleService.get('climatebehinddriver', function(event){ evObj=event;});
+        waitsFor(function() {
+            return evObj;
+        }, "onDelivery callback to be called. (not implemented)" , 3000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('climatebehinddriver');
+            expect(evObj.cbdtemp).toEqual(jasmine.any(Number));
+            expect(evObj.cbdac).toEqual(jasmine.any(String));
+            expect(evObj.cbdvl).toEqual(jasmine.any(Number));
+            expect(evObj.cbdvm).toEqual(jasmine.any(String));
+        });
+    }); 
+
+     it("can register and get climate BehindPassenger data", function() {
+        var evObj = null;
+        boundVehicleService.get('climatebehindpassenger', function(event){ evObj=event;});
+        waitsFor(function() {
+            return evObj;
+        }, "onDelivery callback to be called. (not implemented)" , 3000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('climatebehindpassenger');
+            expect(evObj.cbptemp).toEqual(jasmine.any(Number));
+            expect(evObj.cbpac).toEqual(jasmine.any(String));
+            expect(evObj.cbpvl).toEqual(jasmine.any(Number));
+            expect(evObj.cbpvm).toEqual(jasmine.any(String));
+        });
+    });
+    
+
+  /*  it("can register and receive events on gear data", function() {
         var evObj = null;
         boundVehicleService.addEventListener('shift', function(event){evObj = event;}, false);
         waitsFor(function() {
@@ -191,9 +261,9 @@ describe("Vehicle API", function() {
         });
         
         
-    });
+    }); */
     
-    it("can register and receive events on trip computer data", function() {
+  /*  it("can register and receive events on trip computer data", function() {
         var evObj = null;
         boundVehicleService.addEventListener('tripcomputer', function(event){evObj = event;}, false);
         
@@ -211,10 +281,10 @@ describe("Vehicle API", function() {
             expect(parseFloat(evObj.range)).toEqual(jasmine.any(Number));
             expect(parseFloat(evObj.tripDistance)).toEqual(jasmine.any(Number));
         });
-    });
+    });*/
     
 
-    it("can register and receive events on parksensor data", function() {
+/*  it("can register and receive events on parksensor data", function() {
         var evObj = null;
         boundVehicleService.addEventListener('parksensors-front', function(event){evObj = event;}, false);
         
@@ -234,10 +304,10 @@ describe("Vehicle API", function() {
             expect(parseFloat(evObj.outRight)).toEqual(jasmine.any(Number));
             expect(evObj.timestamp).toEqual(jasmine.any(Number));
         });
-    });
+    }); */
 
     //not implemented for simulator
-    it("can register and receive events on control data", function() {
+  /* it("can register and receive events on control data", function() {
         var evObj = null;
         boundVehicleService.addEventListener('lights-fog-front', function(event){evObj = event;}, false);
         
@@ -251,28 +321,196 @@ describe("Vehicle API", function() {
             expect(evObj.controlId).toEqual('lights-fog-front');
             expect(evObj.active).toEqual(jasmine.any(Boolean));     
         });
-    });
+    }); */
 
-    //not implemented for simulator
-    it("can register and receive events on control data", function() {
+   /* it("can register and receive events on Door data", function() {
         var evObj = null;
-        boundVehicleService.addEventListener('climate-driver', function(event){evObj = event;}, false);
+        boundVehicleService.get('door', function(event){evObj = event;}, false);
         
         waitsFor(function() {
             return evObj;
         }, "onEvent callback to be called. (not implemented)", 10000);
 
         runs(function() {
-            expect(evObj.zone).toEqual('climate-driver');
-            expect(evObj.desiredTemperature).toEqual(jasmine.any(Number));
-            expect(evObj.acStatus).toEqual(jasmine.any(Boolean));
-            expect(evObj.ventLevel).toEqual(jasmine.any(Number));
-            expect(evObj.ventMode).toEqual(jasmine.any(Boolean));   
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('door');
+            expect(evObj.driver).toEqual(jasmine.any(Boolean));
+            expect(evObj.frontpassenger).toEqual(jasmine.any(Boolean));
+            expect(evObj.behinddriver).toEqual(jasmine.any(Boolean));
+            expect(evObj.behindpassenger).toEqual(jasmine.any(Boolean)); 
+            expect(evObj.trunkdeck).toEqual(jasmine.any(Boolean)); 
+        });
+    }); */
+
+    //Implemented for simulator
+    it("can register and receive events on Window data", function() {
+        var evObj = null;
+        boundVehicleService.get('window', function(event){evObj = event;}, false);
+        
+        waitsFor(function() {
+            return evObj;
+        }, "onEvent callback to be called. (not implemented)", 10000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('window');
+            expect(evObj.driver).toEqual(jasmine.any(Number));
+            expect(evObj.frontpassenger).toEqual(jasmine.any(Number));
+            expect(evObj.behinddriver).toEqual(jasmine.any(Number));
+            expect(evObj.behindpassenger).toEqual(jasmine.any(Number));  
+        });
+    });
+
+    /*it("can register and receive events on Window data", function() {
+        var evObj = null;
+        boundVehicleService.addEventListener('window', function(event){evObj = event;}, false);
+        
+        waitsFor(function() {
+            return evObj;
+        }, "onEvent callback to be called. (not implemented)", 50000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('window');
+            expect(evObj.driver).toEqual(jasmine.any(Number));
+            expect(evObj.frontpassenger).toEqual(jasmine.any(Number));
+            expect(evObj.behinddriver).toEqual(jasmine.any(Number));
+            expect(evObj.behindpassenger).toEqual(jasmine.any(Number));  
+        });
+    });*/
+
+    //Implemented for simulator
+    it("can register and receive events on Tirepressure data", function() {
+        var evObj = null;
+        boundVehicleService.get('tirepressure', function(event){evObj = event;}, false);
+        
+        waitsFor(function() {
+            return evObj;
+        }, "onEvent callback to be called. (not implemented)", 10000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('tirepressure');
+            expect(evObj.frontleft).toEqual(jasmine.any(Number));
+            expect(evObj.frontright).toEqual(jasmine.any(Number));
+            expect(evObj.rearleft).toEqual(jasmine.any(Number));
+            expect(evObj.rearright).toEqual(jasmine.any(Number));
+        });
+    });
+
+    //Implemented for simulator
+    it("can register and receive events on Wiper data", function() {
+        var evObj = null;
+        boundVehicleService.get('wiper', function(event){evObj = event;}, false);
+        
+        waitsFor(function() {
+            return evObj;
+        }, "onEvent callback to be called. (not implemented)", 10000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('wiper');
+            expect(evObj.status).toEqual(jasmine.any(String));
+        });
+    });
+
+    //Implemented for simulator
+    it("can register and receive events on Engine Oil data", function() {
+        var evObj = null;
+        boundVehicleService.get('engineoil', function(event){evObj = event;}, false);
+        
+        waitsFor(function() {
+            return evObj;
+        }, "onEvent callback to be called. (not implemented)", 10000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('engineoil');
+            expect(evObj.level).toEqual(jasmine.any(String));
+        });
+    });
+
+     //Implemented for simulator
+    it("can register and receive events on Interfaces data", function() {
+        var evObj = null;
+        boundVehicleService.get('interfaces', function(event){evObj = event;}, false);
+        
+        waitsFor(function() {
+            return evObj;
+        }, "onEvent callback to be called. (not implemented)", 10000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('interfaces');
+            expect(evObj.fuel).toEqual(jasmine.any(String));
+            expect(evObj.hybrid).toEqual(jasmine.any(String));
+            expect(evObj.steeringwheel).toEqual(jasmine.any(String));
+            expect(evObj.vehicletransmission).toEqual(jasmine.any(String));
+        });
+    });
+
+     it("can register and receive events on Seat Driver data", function() {
+        var evObj = null;
+        boundVehicleService.get('seatdriver', function(event){evObj = event;}, false);
+        
+        waitsFor(function() {
+            return evObj;
+        }, "onEvent callback to be called. (not implemented)", 10000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('seatdriver');
+            expect(evObj.seatdriver).toEqual(jasmine.any(String));
+        });
+    });
+
+    it("can register and receive events on Seat FrontPassenger data", function() {
+        var evObj = null;
+        boundVehicleService.get('seatfrontpassenger', function(event){evObj = event;}, false);
+        
+        waitsFor(function() {
+            return evObj;
+        }, "onEvent callback to be called. (not implemented)", 10000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('seatfrontpassenger');
+            expect(evObj.seatfrontpassenger).toEqual(jasmine.any(String));
+        });
+    });
+
+     it("can register and receive events on Seat BehindDriver data", function() {
+        var evObj = null;
+        boundVehicleService.get('seatbehinddriver', function(event){evObj = event;}, false);
+        
+        waitsFor(function() {
+            return evObj;
+        }, "onEvent callback to be called. (not implemented)", 10000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('seatbehinddriver');
+            expect(evObj.seatbehinddriver).toEqual(jasmine.any(String));
+        });
+    });
+
+    it("can register and receive events on Seat BehindPassenger data", function() {
+        var evObj = null;
+        boundVehicleService.get('seatbehindpassenger', function(event){evObj = event;}, false);
+        
+        waitsFor(function() {
+            return evObj;
+        }, "onEvent callback to be called. (not implemented)", 10000);
+
+        runs(function() {
+            expect(evObj).toEqual(jasmine.any(Object));
+            expect(evObj.type).toEqual('seatbehindpassenger');
+            expect(evObj.seatbehindpassenger).toEqual(jasmine.any(String));
         });
     });
 
     //Currently not implemented
-    it("can find a POI", function() {
+   /* it("can find a POI", function() {
         var results = null;
         boundVehicleService.findDestionation(function(data){results = data;}, function(err){}, 'Test');
         
@@ -283,10 +521,10 @@ describe("Vehicle API", function() {
         runs(function() {
             expect(results).toEqual(jasmine.any(Array));
         });
-    });
+    });*/
     
     //Currently not implemented
-    it("can request guidance to a POI", function() {
+   /* it("can request guidance to a POI", function() {
         var destinationSet = false;
         boundVehicleService.requestGuidance(function(){destinationSet=true;}, function(err){destinationSet=false;}, 'Test');
         
@@ -297,6 +535,6 @@ describe("Vehicle API", function() {
         runs(function() {
             expect(destinationSet).toEqual(true);
         });
-    });
+    });*/
 
 });
