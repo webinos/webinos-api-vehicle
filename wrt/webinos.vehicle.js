@@ -18,10 +18,14 @@
 
 (function () {
     Vehicle = function (obj) {
-        this.base = WebinosService;
-        this.base(obj);
-    }
-    Vehicle.prototype = new WebinosService;
+        WebinosService.call(this, obj);
+    };
+    // Inherit all functions from WebinosService
+    Vehicle.prototype = Object.create(WebinosService.prototype);
+    // The following allows the 'instanceof' to work properly
+    Vehicle.prototype.constructor = Vehicle;
+    // Register to the service discovery
+    _webinos.registerServiceConstructor("http://webinos.org/api/vehicle", Vehicle);
     Vehicle.prototype.bindService = function (bindCB, serviceId) {
         // actually there should be an auth check here or whatever, but we just always bind
         //METHODS
