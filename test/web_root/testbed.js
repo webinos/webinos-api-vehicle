@@ -497,7 +497,8 @@ $(document).ready(function () {
   $('#vt_removeListener').bind('click', function () {
     vehicle.removeEventListener($('#vt_vehicleDataId').val(), getMessageHandler($('#vt_vehicleDataId').val()), false);
     postMessage('info', 'Listener removed for' + $('#vehicleDataId').val());
-    $('#vt_info').html("<img src='/client/vehicle/general/ajaxloader.gif'>");
+  //  $('#vt_info').html("<img src='../webinos-api-vehicle/test/web_root/general/ajaxloader.gif'>");
+    $('#vt_info').html('Add Listener has been Disabled');
     for (i = 0; listeners.length; i++) {
       if (listeners[i] == $('#vt_vehicleDataId').val()) {
         listeners.splice(i, 1);
